@@ -2,6 +2,7 @@
   "name": "secret-santa",
   "version": "0.1.0",
   "private": true,
+  "license": "ISC",
   "dependencies": {
     "@types/jest": "24.0.18",
     "@types/node": "12.7.5",
