@@ -42,8 +42,7 @@ export const PersonForm: FC<Props> = ({ people, onSubmit }) => {
       });
 
       instance.reset();
-    },
-    debugForm: true
+    }
   });
 
   const {
