@@ -13,6 +13,8 @@ declare module 'react-form' {
   } from 'react';
 
   type Debounce = (fn: (...args: any[]) => any, wait: number) => Promise<any>;
+  type ValidatorReturn = string | false | undefined;
+  type OptionalPromise<T> = Promise<T> | T;
 
   interface FormMeta {
     error: string | any;
@@ -69,11 +71,11 @@ declare module 'react-form' {
 
   interface FormOptions<T> {
     defaultValues: T;
-    onSubmit: (values: T, instance: FormInstance<T>) => Promise<any> | any;
+    onSubmit: (values: T, instance: FormInstance<T>) => OptionalPromise<void>;
     validate: (
       values: Partial<T>,
       instance: FormInstance<T>
-    ) => Promise<string | false | undefined> | string | false | undefined;
+    ) => OptionalPromise<ValidatorReturn>;
     validatePristine?: boolean;
     debugForm: boolean;
   }
@@ -129,7 +131,7 @@ declare module 'react-form' {
     validate?: (
       values: any,
       instance: FieldInstance
-    ) => Promise<string | false | undefined> | string | false | undefined;
+    ) => OptionalPromise<ValidatorReturn>;
     filterValue?: <T extends any>(values: T, instance: FieldInstance) => T;
     validatePristine?: boolean;
   }
@@ -140,7 +142,10 @@ declare module 'react-form' {
   ): FieldInstance;
 
   interface FieldOptionProps extends FieldOptions {
-    onSubmit?: (values: any, instance: FormInstance<any>) => Promise<any> | any;
+    onSubmit?: (
+      values: any,
+      instance: FormInstance<any>
+    ) => OptionalPromise<void>;
     defaultValues?: any;
     debugForm?: boolean;
   }
