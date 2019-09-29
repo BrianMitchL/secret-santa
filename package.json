@@ -12,7 +12,7 @@
     "gift-exchange": "^1.0.0",
     "react": "^16.9.0",
     "react-dom": "^16.9.0",
-    "react-form": "^4.0.0-alpha.8",
+    "react-form": "^4.0.0-alpha.14",
     "react-scripts": "3.1.2",
     "typescript": "3.6.3"
   },
