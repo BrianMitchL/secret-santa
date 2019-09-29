@@ -6,12 +6,12 @@
   "homepage": "https://brianmitchl.github.io/secret-santa",
   "dependencies": {
     "@types/jest": "24.0.18",
-    "@types/node": "12.7.5",
-    "@types/react": "16.9.2",
-    "@types/react-dom": "16.9.0",
+    "@types/node": "12.7.8",
+    "@types/react": "16.9.3",
+    "@types/react-dom": "16.9.1",
     "gift-exchange": "^1.0.0",
-    "react": "^16.9.0",
-    "react-dom": "^16.9.0",
+    "react": "^16.10.1",
+    "react-dom": "^16.10.1",
     "react-form": "^4.0.0-alpha.14",
     "react-scripts": "3.1.2",
     "typescript": "3.6.3"
@@ -41,7 +41,7 @@
   },
   "devDependencies": {
     "gh-pages": "^2.1.1",
-    "husky": "^3.0.5",
+    "husky": "^3.0.7",
     "prettier": "^1.18.2",
     "pretty-quick": "^1.11.1"
   },
