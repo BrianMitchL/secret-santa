@@ -12,7 +12,7 @@ declare module 'react-form' {
     SetStateAction
   } from 'react';
 
-  type Debounce = (fn: (...args: any[]) => any, wait: number) => Promise<any>;
+  type Debounce = <T>(fn: (...args: any[]) => T, wait: number) => Promise<T>;
   type ValidatorReturn = string | false | undefined;
   type OptionalPromise<T> = Promise<T> | T;
 
@@ -42,21 +42,21 @@ declare module 'react-form' {
     debounce: Debounce;
     setValues: Dispatch<SetStateAction<T>>;
     runValidation: () => void;
-    getFieldValue: (fieldPath: keyof T | string) => any;
+    getFieldValue: <V = any>(fieldPath: keyof T | string) => V;
     getFieldMeta: (
       fieldPath: keyof T | string
     ) => { error: string | null; [k: string]: any };
-    setFieldValue: <S = any>(
+    setFieldValue: <V = any>(
       fieldPath: keyof T | string,
-      updater: SetValue<S>,
+      updater: SetValue<V>,
       options?: { isTouched: boolean }
     ) => void;
     setFieldMeta: (fieldPath: keyof T | string, value: SetFieldMeta) => void;
-    pushFieldValue: (fieldPath: keyof T | string, value: any) => void;
-    insertFieldValue: (
+    pushFieldValue: <V = any>(fieldPath: keyof T | string, value: V) => void;
+    insertFieldValue: <V = any>(
       fieldPath: keyof T | string,
       insertIndex: number,
-      value: any
+      value: V
     ) => void;
     removeFieldValue: (
       fieldPath: keyof T | string,
@@ -80,14 +80,14 @@ declare module 'react-form' {
     debugForm: boolean;
   }
 
-  export function useForm<T = {}>(
+  export function useForm<T extends {} = {}>(
     options?: Partial<FormOptions<T>>
   ): FormInstance<T>;
 
-  export function useFormContext<T = {}>(): FormInstance<T>;
+  export function useFormContext<T extends {} = {}>(): FormInstance<T>;
 
   interface FieldMeta {
-    error: string | any;
+    error: string | false;
     isTouched: boolean;
     [k: string]: any;
   }
@@ -97,64 +97,66 @@ declare module 'react-form' {
     | Partial<FieldMeta>
     | ((previousMeta: FieldMeta) => FieldMeta);
 
-  interface FieldInstance {
-    form: FormInstance<any>;
+  interface FieldInstance<T = any, F = any> {
+    form: FormInstance<F>;
     fieldName: string;
-    value: any;
+    value: T;
     meta: FieldMeta;
     FieldScope?: ComponentType<Provider<any>>;
     debounce: Debounce;
     runValidation: () => void;
     getInputProps: (
-      value: Partial<HTMLProps<HTMLInputElement>>
+      value: Partial<HTMLProps<HTMLInputElement>> &
+        Pick<HTMLProps<HTMLInputElement>, 'onSubmit'> &
+        Pick<HTMLProps<HTMLInputElement>, 'onBlur'>
     ) => {
-      value: string | string[] | number;
+      value: T;
       onChange: ChangeEventHandler<HTMLInputElement>;
       onBlur: FocusEventHandler<HTMLInputElement>;
     } & Partial<HTMLProps<HTMLInputElement>>;
-    setValue: <S = any>(
-      updater: SetValue<S>,
+    setValue: <V = any>(
+      updater: SetValue<V>,
       options?: { isTouched: boolean }
     ) => void;
     setMeta: (value: SetFieldMeta) => void;
-    pushValue: (value: any) => void;
-    insertValue: (insertIndex: number, value: any) => void;
+    pushValue: <V = any>(value: V) => void;
+    insertValue: <V = any>(insertIndex: number, value: V) => void;
     removeValue: (removalIndex: number) => void;
     swapValues: (firstIndex: number, secondIndex: number) => void;
   }
 
-  interface FieldOptions {
-    defaultValue?: any;
+  interface FieldOptions<T> {
+    defaultValue?: T;
     defaultError?: string;
     defaultIsTouched?: boolean;
     defaultMeta?: FieldMeta;
     validate?: (
-      values: any,
+      value: T,
       instance: FieldInstance
     ) => OptionalPromise<ValidatorReturn>;
-    filterValue?: <T extends any>(values: T, instance: FieldInstance) => T;
+    filterValue?: <T = any>(values: T, instance: FieldInstance) => T;
     validatePristine?: boolean;
   }
 
-  export function useField(
+  export function useField<T = any>(
     fieldPath: string,
-    options?: FieldOptions
+    options?: FieldOptions<T>
   ): FieldInstance;
 
-  interface FieldOptionProps extends FieldOptions {
+  interface FieldOptionProps<T = any, Form = any> extends FieldOptions<T> {
     onSubmit?: (
-      values: any,
-      instance: FormInstance<any>
+      value: T,
+      instance: FormInstance<Form>
     ) => OptionalPromise<void>;
-    defaultValues?: any;
+    defaultValues?: Form;
     debugForm?: boolean;
   }
 
-  export function splitFormProps<P = {}>(
-    props: { field: string } & FieldOptionProps & P
-  ): [typeof props['field'], FieldOptionProps, P];
+  export function splitFormProps<P = {}, T = any>(
+    props: FieldProps<T> & P
+  ): [typeof props['field'], FieldOptionProps<T>, P];
 
-  export interface FieldProps extends FieldOptionProps {
+  export interface FieldProps<T = any> extends FieldOptionProps<T> {
     field: string;
   }
 }
