@@ -1,4 +1,4 @@
-import React, { FC, useLayoutEffect, useState } from 'react';
+import * as React from 'react';
 import { calculate, Person } from 'gift-exchange';
 import { Pairs } from './pairs';
 
@@ -6,12 +6,12 @@ interface Props {
   people: Person[];
 }
 
-export const Matches: FC<Props> = ({ people }) => {
-  const [pairs, setPairs] = useState<[string, string][]>([]);
-  const [error, setError] = useState<null | Error>(null);
+export function Matches({ people }: Props) {
+  const [pairs, setPairs] = React.useState<[string, string][]>([]);
+  const [error, setError] = React.useState<null | Error>(null);
 
   // needs to be a layout effect to prevent flashing when changing people
-  useLayoutEffect(() => {
+  React.useLayoutEffect(() => {
     setPairs([]);
   }, [people]);
 
@@ -41,4 +41,4 @@ export const Matches: FC<Props> = ({ people }) => {
       {error && error.message}
     </>
   );
-};
+}

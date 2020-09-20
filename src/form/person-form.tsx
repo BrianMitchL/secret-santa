@@ -1,85 +1,71 @@
-import React, { FC, useEffect, useMemo, useRef } from 'react';
-import { useForm } from 'react-form';
+import * as React from 'react';
+import { SubmitHandler, useForm } from 'react-hook-form';
 import './form.css';
 import { Person } from 'gift-exchange';
-import { InputField } from './input-field';
-import { SelectInputField } from './select-input-field';
 
 type FormValues = {
   name: string;
   group: string;
 };
 
-const defaultValues: FormValues = {
-  name: '',
-  group: ''
-};
-
 interface Props {
-  people: Person[];
+  usedNames: string[];
+  usedGroups: string[];
   onSubmit: (person: Person) => void;
 }
 
-const isString = (str: unknown): str is string => typeof str === 'string';
-
-export const PersonForm: FC<Props> = ({ people, onSubmit }) => {
-  const usedNames = useMemo(() => people.map(p => p.name), [people]);
-  const usedGroups = useMemo(
-    () => [...new Set(people.map(p => p.group).filter(isString))],
-    [people]
-  );
-  const nameInput = useRef<null | HTMLInputElement>(null);
-
-  const validateName = (value: string) =>
-    value && !usedNames.includes(value) ? false : 'A unique name is required';
-
-  const instance = useForm<FormValues>({
-    defaultValues,
-    onSubmit: (values, instance) => {
-      onSubmit({
-        name: values.name,
-        ...(values.group && { group: values.group })
-      });
-
-      instance.reset();
-    }
-  });
-
-  const {
-    Form,
-    meta: { canSubmit, isTouched, isSubmitted },
-    getFieldMeta
-  } = instance;
-
-  useEffect(() => {
-    if (nameInput.current && isSubmitted && !isTouched) {
-      nameInput.current.focus();
-    }
-  }, [isSubmitted, isTouched]);
-
-  const nameField = getFieldMeta('name');
+export const PersonForm = ({ usedNames, usedGroups, onSubmit }: Props) => {
+  const { errors, handleSubmit, register, reset } = useForm();
+  const submitHandler: SubmitHandler<FormValues> = (data) => {
+    console.log(data);
+    onSubmit({
+      name: data.name,
+      group: data.group === '' ? undefined : data.group,
+    });
+    reset();
+  };
 
   return (
-    <Form>
+    <form onSubmit={handleSubmit(submitHandler)}>
       <fieldset>
         <legend>Add a New Person</legend>
-        <label htmlFor="name">Name</label>
-        <InputField
-          field="name"
-          validate={validateName}
-          ref={nameInput}
+        <label htmlFor="name" className="label-required">
+          Name
+        </label>
+        <input
+          id="name"
+          name="name"
           type="text"
-          required
+          ref={register({
+            required: 'A name is required',
+            validate: (value) =>
+              (value && !usedNames.includes(value)) ||
+              'The name must be unique',
+          })}
         />
+        {errors.name && (
+          <span className="validation">{errors.name.message}</span>
+        )}
         <label htmlFor="group">Group</label>
-        <SelectInputField field="group" options={usedGroups} />
-        <button
-          type="submit"
-          disabled={!canSubmit || (nameField && !nameField.isTouched)}
-        >
-          Submit
-        </button>
+        <input
+          id="group"
+          name="group"
+          type="text"
+          list="groupOptions"
+          autoComplete="off"
+          ref={register}
+        />
+        <datalist id="groupOptions">
+          {usedGroups.map((group) => (
+            <option key={group}>{group}</option>
+          ))}
+        </datalist>
+        <p className="meta">
+          Use groups to prevent people in the same group from matching with each
+          other.
+        </p>
+        <button type="submit">Add Person</button>
       </fieldset>
-    </Form>
+    </form>
   );
 };
