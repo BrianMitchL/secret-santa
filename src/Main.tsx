@@ -1,11 +1,12 @@
 import * as React from 'react';
-import { PersonForm } from './form/person-form';
-import { PeopleList } from './people-list';
+import { PersonForm } from './people/PersonForm';
+import { People } from './people/People';
 import { Exclusion, Person } from 'gift-exchange';
-import { Matches } from './matches';
-import { exclusionKey } from './utils';
-import { ExclusionsList } from './exclusions-list';
-import { ExclusionForm } from './form/exclusion-form';
+import { Matches } from './matches/Matches';
+import { exclusionKey } from './common/utils';
+import { Exclusions } from './exclusions/Exclusions';
+import { ExclusionForm } from './exclusions/ExclusionForm';
+import { Section } from './common/Section';
 
 export interface EnhancedExclusion extends Exclusion {
   key: string;
@@ -48,25 +49,26 @@ export function Main() {
 
   return (
     <main>
-      <PersonForm
-        usedNames={usedNames}
-        usedGroups={usedGroups}
-        onSubmit={addPerson}
-      />
-      <hr />
-      <ExclusionForm
-        usedNames={usedNames}
-        usedGroups={usedGroups}
-        usedExclusionKeys={usedExclusionKeys}
-        onSubmit={addExclusion}
-      />
-      <hr />
-      <PeopleList people={people} removePerson={removePerson} />
-      <ExclusionsList
-        exclusions={exclusions}
-        removeExclusion={removeExclusion}
-      />
-      <Matches people={people} exclusions={exclusions} />
+      <Section heading="People">
+        <PersonForm
+          usedNames={usedNames}
+          usedGroups={usedGroups}
+          onSubmit={addPerson}
+        />
+        <People people={people} removePerson={removePerson} />
+      </Section>
+      <Section heading="Exclusions">
+        <ExclusionForm
+          usedNames={usedNames}
+          usedGroups={usedGroups}
+          usedExclusionKeys={usedExclusionKeys}
+          onSubmit={addExclusion}
+        />
+        <Exclusions exclusions={exclusions} removeExclusion={removeExclusion} />
+      </Section>
+      <Section heading="Matches">
+        <Matches people={people} exclusions={exclusions} />
+      </Section>
     </main>
   );
 }

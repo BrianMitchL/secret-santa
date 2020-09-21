@@ -1,10 +1,10 @@
 import * as React from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
-import './form.css';
+import '../form/form.css';
 import { Exclusion } from 'gift-exchange';
-import { exclusionKey } from '../utils';
+import { exclusionKey } from '../common/utils';
 import { ErrorMessage } from '@hookform/error-message';
-import { ValidationError } from './ValidationError';
+import { ValidationError } from '../form/ValidationError';
 
 type FormValues = Exclusion;
 
@@ -36,6 +36,7 @@ export const ExclusionForm = ({
 
   return (
     <form onSubmit={handleSubmit(submitHandler)}>
+      <p>A Source will not be matched with the Excluded.</p>
       <fieldset>
         <legend>Source</legend>
         <label>
@@ -67,6 +68,7 @@ export const ExclusionForm = ({
         <select
           id="subject"
           name="subject"
+          disabled={(type === 'name' ? usedNames : usedGroups).length < 1}
           ref={register({
             required: `A ${type} is required`,
             validate: (value) =>
@@ -116,6 +118,9 @@ export const ExclusionForm = ({
         <select
           id="excludedSubject"
           name="excludedSubject"
+          disabled={
+            (excludedType === 'name' ? usedNames : usedGroups).length < 1
+          }
           ref={register({
             required: `A ${excludedType} is required`,
             validate: (value) =>

@@ -4,15 +4,28 @@ fieldset {
 }
 
 fieldset > legend {
-  font-size: 1.6rem;
+  font-size: 1.25rem;
 }
 
-label {
+label[for] {
   display: block;
 }
 
-input[type='text'] {
+label[for] + input {
   width: 100%;
+}
+
+label:not([for]) + label:not([for]) {
+  margin-left: 0.5rem;
+}
+
+select {
+  min-width: 100px;
+}
+
+select[disabled] {
+  opacity: 0.5;
+  cursor: not-allowed;
 }
 
 .label-required::after {

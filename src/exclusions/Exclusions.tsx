@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { EnhancedExclusion } from './Main';
+import { EnhancedExclusion } from '../Main';
 
 interface Props {
   exclusions: EnhancedExclusion[];
@@ -20,7 +20,7 @@ const ExclusionItem = ({ exclusion, removeHandler }: ExclusionItemProps) => (
   </dd>
 );
 
-export function ExclusionsList({ exclusions, removeExclusion }: Props) {
+export function Exclusions({ exclusions, removeExclusion }: Props) {
   const names = exclusions.filter((e) => e.type === 'name');
   const groups = exclusions.filter((e) => e.type === 'group');
 

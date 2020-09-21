@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { calculate, Exclusion, Person } from 'gift-exchange';
-import { Pairs } from './pairs';
+import { Pairs } from './Pairs';
 
 interface Props {
   people: Person[];

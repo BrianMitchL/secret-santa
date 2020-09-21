@@ -12,7 +12,7 @@ interface PeopleListProps {
   removePerson: (person: Person) => void;
 }
 
-export function PeopleList({ people, removePerson }: PeopleListProps) {
+export function People({ people, removePerson }: PeopleListProps) {
   const groups = people.reduce<
     Array<{
       group: string | null;

@@ -1,9 +1,9 @@
 import * as React from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
-import './form.css';
+import '../form/form.css';
 import { Person } from 'gift-exchange';
 import { ErrorMessage } from '@hookform/error-message';
-import { ValidationError } from './ValidationError';
+import { ValidationError } from '../form/ValidationError';
 
 type FormValues = {
   name: string;
@@ -61,8 +61,8 @@ export const PersonForm = ({ usedNames, usedGroups, onSubmit }: Props) => {
           ))}
         </datalist>
         <p className="meta">
-          Use groups to prevent people in the same group from matching with each
-          other.
+          Use groups for simple exclusions to prevent people in the same group
+          from matching with each other.
         </p>
         <button type="submit">Add Person</button>
       </fieldset>
