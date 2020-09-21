@@ -1,24 +1,25 @@
-import React, { FC, useLayoutEffect, useState } from 'react';
-import { calculate, Person } from 'gift-exchange';
-import { Pairs } from './pairs';
+import * as React from 'react';
+import { calculate, Exclusion, Person } from 'gift-exchange';
+import { Pairs } from './Pairs';
 
 interface Props {
   people: Person[];
+  exclusions: Exclusion[];
 }
 
-export const Matches: FC<Props> = ({ people }) => {
-  const [pairs, setPairs] = useState<[string, string][]>([]);
-  const [error, setError] = useState<null | Error>(null);
+export function Matches({ people, exclusions }: Props) {
+  const [pairs, setPairs] = React.useState<[Person, Person][]>([]);
+  const [error, setError] = React.useState<null | Error>(null);
 
   // needs to be a layout effect to prevent flashing when changing people
-  useLayoutEffect(() => {
+  React.useLayoutEffect(() => {
     setPairs([]);
-  }, [people]);
+  }, [people, exclusions]);
 
   const calculateMatches = async () => {
     try {
-      const m = await calculate(people);
-      setPairs(m.map((p, i) => [people[i].name, p.name]));
+      const m = await calculate(people, exclusions);
+      setPairs(m.map((p, i) => [people[i], p]));
     } catch (e) {
       setError(e);
       setPairs([]);
@@ -41,4 +42,4 @@ export const Matches: FC<Props> = ({ people }) => {
       {error && error.message}
     </>
   );
-};
+}

@@ -1,33 +1,21 @@
-import React, { FC, useState } from 'react';
-import './App.css';
-import { PersonForm } from './form/person-form';
-import { PeopleList } from './people-list';
-import { Person } from 'gift-exchange';
-import { Matches } from './matches';
+import * as React from 'react';
+import { Main } from './Main';
 
-const App: FC = () => {
-  const [people, setPeople] = useState<Person[]>([]);
-
-  const addPerson = (person: Person) => {
-    setPeople(prev => prev.concat(person));
-  };
-
-  const removePerson = (person: Person) => {
-    setPeople(prevPeople => prevPeople.filter(p => p.name !== person.name));
-  };
-
+function App() {
   return (
-    <div className="App">
-      <header className="App-header">
+    <>
+      <header>
         <h1>Secret Santa</h1>
+        <p>
+          By{' '}
+          <a href="https://brianm.me" rel="noopener noreferrer">
+            Brian Mitchell
+          </a>
+        </p>
       </header>
-      <main>
-        <PersonForm people={people} onSubmit={addPerson} />
-        <PeopleList people={people} removePerson={removePerson} />
-        <Matches people={people} />
-      </main>
-    </div>
+      <Main />
+    </>
   );
-};
+}
 
 export default App;
