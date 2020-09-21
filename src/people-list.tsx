@@ -40,8 +40,7 @@ export function PeopleList({ people, removePerson }: PeopleListProps) {
           </dt>
           {group.people.map((p) => (
             <dd key={p.name}>
-              {p.name}
-              <button onClick={() => removePerson(p)}>Remove</button>
+              {p.name} <button onClick={() => removePerson(p)}>Remove</button>
             </dd>
           ))}
         </React.Fragment>

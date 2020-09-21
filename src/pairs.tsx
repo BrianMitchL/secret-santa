@@ -1,7 +1,8 @@
 import * as React from 'react';
+import { Person } from 'gift-exchange';
 
 interface Props {
-  pairs: [string, string][];
+  pairs: [Person, Person][];
 }
 
 export function Pairs({ pairs }: Props) {
@@ -15,10 +16,16 @@ export function Pairs({ pairs }: Props) {
         </tr>
       </thead>
       <tbody>
-        {pairs.map((pair) => (
-          <tr key={pair[0]}>
-            <td>{pair[0]}</td>
-            <td>{pair[1]}</td>
+        {pairs.map(([a, b]) => (
+          <tr key={a.name}>
+            <td>
+              {a.name}
+              {a.group && ` ${a.group}`}
+            </td>
+            <td>
+              {b.name}
+              {b.group && ` ${b.group}`}
+            </td>
           </tr>
         ))}
       </tbody>

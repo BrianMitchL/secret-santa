@@ -1,24 +1,25 @@
 import * as React from 'react';
-import { calculate, Person } from 'gift-exchange';
+import { calculate, Exclusion, Person } from 'gift-exchange';
 import { Pairs } from './pairs';
 
 interface Props {
   people: Person[];
+  exclusions: Exclusion[];
 }
 
-export function Matches({ people }: Props) {
-  const [pairs, setPairs] = React.useState<[string, string][]>([]);
+export function Matches({ people, exclusions }: Props) {
+  const [pairs, setPairs] = React.useState<[Person, Person][]>([]);
   const [error, setError] = React.useState<null | Error>(null);
 
   // needs to be a layout effect to prevent flashing when changing people
   React.useLayoutEffect(() => {
     setPairs([]);
-  }, [people]);
+  }, [people, exclusions]);
 
   const calculateMatches = async () => {
     try {
-      const m = await calculate(people);
-      setPairs(m.map((p, i) => [people[i].name, p.name]));
+      const m = await calculate(people, exclusions);
+      setPairs(m.map((p, i) => [people[i], p]));
     } catch (e) {
       setError(e);
       setPairs([]);

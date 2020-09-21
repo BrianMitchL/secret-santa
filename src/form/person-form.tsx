@@ -2,6 +2,8 @@ import * as React from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import './form.css';
 import { Person } from 'gift-exchange';
+import { ErrorMessage } from '@hookform/error-message';
+import { ValidationError } from './ValidationError';
 
 type FormValues = {
   name: string;
@@ -17,7 +19,6 @@ interface Props {
 export const PersonForm = ({ usedNames, usedGroups, onSubmit }: Props) => {
   const { errors, handleSubmit, register, reset } = useForm();
   const submitHandler: SubmitHandler<FormValues> = (data) => {
-    console.log(data);
     onSubmit({
       name: data.name,
       group: data.group === '' ? undefined : data.group,
@@ -43,9 +44,8 @@ export const PersonForm = ({ usedNames, usedGroups, onSubmit }: Props) => {
               'The name must be unique',
           })}
         />
-        {errors.name && (
-          <span className="validation">{errors.name.message}</span>
-        )}
+        <ErrorMessage errors={errors} name="name" as={ValidationError} />
+
         <label htmlFor="group">Group</label>
         <input
           id="group"
