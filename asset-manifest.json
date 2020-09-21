@@ -1,15 +1,26 @@
 {
   "files": {
-    "main.css": "/secret-santa/static/css/main.0dcd856f.chunk.css",
-    "main.js": "/secret-santa/static/js/main.6d498955.chunk.js",
-    "main.js.map": "/secret-santa/static/js/main.6d498955.chunk.js.map",
-    "runtime-main.js": "/secret-santa/static/js/runtime-main.4ace76f2.js",
-    "runtime-main.js.map": "/secret-santa/static/js/runtime-main.4ace76f2.js.map",
-    "static/js/2.43569f7c.chunk.js": "/secret-santa/static/js/2.43569f7c.chunk.js",
-    "static/js/2.43569f7c.chunk.js.map": "/secret-santa/static/js/2.43569f7c.chunk.js.map",
+    "main.css": "/secret-santa/static/css/main.0da10c32.chunk.css",
+    "main.js": "/secret-santa/static/js/main.56d7a743.chunk.js",
+    "main.js.map": "/secret-santa/static/js/main.56d7a743.chunk.js.map",
+    "runtime-main.js": "/secret-santa/static/js/runtime-main.1b070df3.js",
+    "runtime-main.js.map": "/secret-santa/static/js/runtime-main.1b070df3.js.map",
+    "static/css/2.2a63d546.chunk.css": "/secret-santa/static/css/2.2a63d546.chunk.css",
+    "static/js/2.65d52de6.chunk.js": "/secret-santa/static/js/2.65d52de6.chunk.js",
+    "static/js/2.65d52de6.chunk.js.map": "/secret-santa/static/js/2.65d52de6.chunk.js.map",
     "index.html": "/secret-santa/index.html",
-    "precache-manifest.4179a9201b5a9afca70a3f1c9166219b.js": "/secret-santa/precache-manifest.4179a9201b5a9afca70a3f1c9166219b.js",
+    "precache-manifest.044a648c89cb5611bbaae822627a69f2.js": "/secret-santa/precache-manifest.044a648c89cb5611bbaae822627a69f2.js",
     "service-worker.js": "/secret-santa/service-worker.js",
-    "static/css/main.0dcd856f.chunk.css.map": "/secret-santa/static/css/main.0dcd856f.chunk.css.map"
-  }
+    "static/css/2.2a63d546.chunk.css.map": "/secret-santa/static/css/2.2a63d546.chunk.css.map",
+    "static/css/main.0da10c32.chunk.css.map": "/secret-santa/static/css/main.0da10c32.chunk.css.map",
+    "static/js/2.65d52de6.chunk.js.LICENSE.txt": "/secret-santa/static/js/2.65d52de6.chunk.js.LICENSE.txt",
+    "static/media/inter.css": "/secret-santa/static/media/Inter.var.f065685b.woff2"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.1b070df3.js",
+    "static/css/2.2a63d546.chunk.css",
+    "static/js/2.65d52de6.chunk.js",
+    "static/css/main.0da10c32.chunk.css",
+    "static/js/main.56d7a743.chunk.js"
+  ]
 }
