@@ -19,7 +19,8 @@ const giftExchangeUmdPath =
 
 export function Matches({ people, exclusions }: Props) {
   const [pairs, setPairs] = React.useState<[Person, Person][]>([]);
-  const [error, setError] = React.useState<null | Error | ErrorEvent>(null);
+  const [error, setError] = React.useState<null | Error>(null);
+  const [showGroups, setShowGroups] = React.useState(false);
 
   // needs to be a layout effect to prevent flashing when changing people
   React.useLayoutEffect(() => {
@@ -79,9 +80,17 @@ export function Matches({ people, exclusions }: Props) {
         disabled={people.length < 1 || workerStatus === 'RUNNING'}
       >
         Match
-      </button>
-      {!error && pairs.length > 0 && <Pairs pairs={pairs} />}
+      </button>{' '}
+      <label>
+        <input
+          type="checkbox"
+          onChange={() => setShowGroups((prevState) => !prevState)}
+          checked={showGroups}
+        />{' '}
+        Show Groups
+      </label>
       {error && <span className="error">{error.message}</span>}
+      <Pairs pairs={error ? [] : pairs} showGroups={showGroups} />
     </>
   );
 }
