@@ -11,6 +11,14 @@ function App() {
           <a href="https://brianm.me" rel="noopener noreferrer">
             Brian Mitchell
           </a>
+          . View the source on{' '}
+          <a
+            href="https://github.com/BrianMitchL/secret-santa"
+            rel="noopener noreferrer"
+          >
+            GitHub
+          </a>
+          .
         </p>
       </header>
       <Main />

@@ -7,11 +7,12 @@
   "dependencies": {
     "@exampledev/new.css": "^1.1.3",
     "@hookform/error-message": "0.0.4",
+    "@koale/useworker": "^3.2.1",
     "@types/jest": "^26.0.14",
     "@types/node": "^12.12.62",
     "@types/react": "^16.9.49",
     "@types/react-dom": "^16.9.8",
-    "gift-exchange": "^2.0.0",
+    "gift-exchange": "^2.1.0",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-hook-form": "^6.8.3",
@@ -20,9 +21,10 @@
     "typescript": "~3.9.7"
   },
   "scripts": {
+    "postinstall": "cpx 'node_modules/gift-exchange/dist/gift-exchange.umd.*' public",
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test",
+    "test": "react-scripts test --env=jest-environment-jsdom-sixteen",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build"
   },
@@ -42,8 +44,10 @@
     ]
   },
   "devDependencies": {
+    "cpx": "^1.5.0",
     "gh-pages": "^3.1.0",
     "husky": "^4.3.0",
+    "jest-environment-jsdom-sixteen": "^1.0.3",
     "prettier": "^2.1.2",
     "pretty-quick": "^3.0.2"
   },
