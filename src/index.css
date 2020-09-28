@@ -8,11 +8,11 @@
 
   --nc-tx-1: #333; /* Heading text color */
   --nc-tx-2: #555; /* Body text color */
-  --nc-tx-2-a025: rgba(85, 85, 85, 0.25); /* Body text color - alpha of 0.25 */
+  --nc-tx-3: #727272; /* Tertiary text color */
   --nc-bg-1: #ffffff; /* Base background color */
   --nc-bg-2: #f6f8fa; /* Slightly darker background color */
   --nc-bg-3: #e5e7eb; /* Even slightly darker background color */
-  --nc-lk-1: #0e75dd; /* Action color for links and buttons */
+  --nc-lk-1: #0d70d3; /* Action color for links and buttons */
   --nc-lk-2: #0957a5; /* Link and buttons on mouse hover and active */
   --nc-lk-tx: #ffffff; /* Text color for link buttons, or cases where link color is used as a background */
   --nc-ac-1: #39f; /* Accent background color for <mark> and text selection background */
@@ -40,10 +40,10 @@
 @media (prefers-color-scheme: dark) {
   :root {
     --nc-tx-1: #ffffff;
-    --nc-tx-2: rgba(255, 255, 255, 0.7);
-    --nc-tx-2-a025: rgba(238, 238, 238, 0.25);
+    --nc-tx-2: #cccccc;
+    --nc-tx-3: #999999;
     --nc-bg-1: #161716;
-    --nc-bg-2: #262726;
+    --nc-bg-2: #232423;
     --nc-bg-3: #363736;
     --nc-lk-1: #ffffff;
     --nc-lk-2: #eeeeee;
@@ -65,4 +65,8 @@
   transition: 0.2s ease-out;
   transition-property: background, background-color, border-color,
     border-top-color, border-left-color, border-bottom-color, border-right-color;
+}
+
+a {
+  text-decoration-skip-ink: auto;
 }

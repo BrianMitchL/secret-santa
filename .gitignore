@@ -25,3 +25,6 @@ yarn-error.log*
 # ides
 .idea
 .vscode
+
+# unbundled dependencies pulled in during Deploy step
+public/gift-exchange.umd.*

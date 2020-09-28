@@ -30,7 +30,7 @@ select[disabled] {
 
 .label-required::after {
   content: ' *';
-  color: #f0506e;
+  color: var(--nc-ac-2);
 }
 
 form .meta {
@@ -38,5 +38,5 @@ form .meta {
 }
 
 form .validation {
-  color: #f0506e;
+  color: var(--nc-ac-2);
 }
