@@ -1,9 +1,9 @@
 import * as React from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
-import '../form/form.css';
+import '../common/form.css';
 import { Person } from 'gift-exchange';
 import { ErrorMessage } from '@hookform/error-message';
-import { ValidationError } from '../form/ValidationError';
+import { ValidationError } from '../common/ValidationError';
 
 type FormValues = {
   name: string;
