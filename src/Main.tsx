@@ -7,6 +7,8 @@ import { exclusionKey } from './common/utils';
 import { Exclusions } from './exclusions/Exclusions';
 import { ExclusionForm } from './exclusions/ExclusionForm';
 import { Section } from './common/Section';
+import { Tab, TabList, TabPanels, Tabs, TabPanel } from '@reach/tabs';
+import './common/tabs.css';
 
 export interface EnhancedExclusion extends Exclusion {
   key: string;
@@ -49,26 +51,45 @@ export function Main() {
 
   return (
     <main>
-      <Section heading="People">
-        <PersonForm
-          usedNames={usedNames}
-          usedGroups={usedGroups}
-          onSubmit={addPerson}
-        />
-        <People people={people} removePerson={removePerson} />
-      </Section>
-      <Section heading="Exclusions">
-        <ExclusionForm
-          usedNames={usedNames}
-          usedGroups={usedGroups}
-          usedExclusionKeys={usedExclusionKeys}
-          onSubmit={addExclusion}
-        />
-        <Exclusions exclusions={exclusions} removeExclusion={removeExclusion} />
-      </Section>
-      <Section heading="Matches">
-        <Matches people={people} exclusions={exclusions} />
-      </Section>
+      <Tabs>
+        <TabList>
+          <Tab>People</Tab>
+          <Tab>Exclusions</Tab>
+          <Tab disabled={people.length < 1}>Matches</Tab>
+        </TabList>
+
+        <TabPanels>
+          <TabPanel>
+            <Section heading="People">
+              <PersonForm
+                usedNames={usedNames}
+                usedGroups={usedGroups}
+                onSubmit={addPerson}
+              />
+              <People people={people} removePerson={removePerson} />
+            </Section>
+          </TabPanel>
+          <TabPanel>
+            <Section heading="Exclusions">
+              <ExclusionForm
+                usedNames={usedNames}
+                usedGroups={usedGroups}
+                usedExclusionKeys={usedExclusionKeys}
+                onSubmit={addExclusion}
+              />
+              <Exclusions
+                exclusions={exclusions}
+                removeExclusion={removeExclusion}
+              />
+            </Section>
+          </TabPanel>
+          <TabPanel>
+            <Section heading="Matches">
+              <Matches people={people} exclusions={exclusions} />
+            </Section>
+          </TabPanel>
+        </TabPanels>
+      </Tabs>
     </main>
   );
 }

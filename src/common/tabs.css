@@ -1,0 +1,58 @@
+:root {
+  --reach-tabs: 1;
+}
+
+[data-reach-tab-list] {
+  display: flex;
+  justify-content: space-evenly;
+  position: relative;
+}
+
+[data-reach-tab-list]::before {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  border-bottom: 1px solid var(--nc-bg-2);
+}
+
+[data-reach-tab-list][aria-orientation='vertical'] {
+  flex-direction: column;
+}
+
+[data-reach-tab] {
+  display: inline-block;
+  border: none;
+  padding: 0.25em 0.5em;
+  margin: 0;
+  background: none;
+  font: inherit;
+  cursor: pointer;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  position: relative;
+  border-radius: 0;
+  border-bottom: 2px solid transparent;
+  color: var(--nc-tx-1);
+  flex: 1 1 auto;
+  font-size: 1.25rem;
+}
+
+[data-reach-tab]:hover,
+[data-reach-tab]:focus {
+  background: none;
+}
+
+[data-reach-tab]:active {
+  background: var(--nc-bg-2);
+}
+
+[data-reach-tab]:disabled {
+  opacity: 0.25;
+  cursor: default;
+}
+
+[data-reach-tab][data-selected] {
+  border-bottom-color: currentColor;
+}
