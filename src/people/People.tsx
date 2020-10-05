@@ -1,5 +1,7 @@
 import * as React from 'react';
 import { Person } from 'gift-exchange';
+import VisuallyHidden from '@reach/visually-hidden';
+import { RemoveButton } from '../common/RemoveButton';
 
 /*
  we need to key on something when rendering the list of groups,
@@ -13,6 +15,10 @@ interface PeopleListProps {
 }
 
 export function People({ people, removePerson }: PeopleListProps) {
+  if (!people.length) {
+    return null;
+  }
+
   const groups = people.reduce<
     Array<{
       group: string | null;
@@ -32,19 +38,25 @@ export function People({ people, removePerson }: PeopleListProps) {
   }, []);
 
   return (
-    <dl>
-      {groups.map((group) => (
-        <React.Fragment key={group.group ?? UNDEFINED_GROUP}>
-          <dt>
-            {group.group === null ? <strong>No Group</strong> : group.group}
-          </dt>
-          {group.people.map((p) => (
-            <dd key={p.name}>
-              {p.name} <button onClick={() => removePerson(p)}>Remove</button>
-            </dd>
-          ))}
-        </React.Fragment>
-      ))}
-    </dl>
+    <>
+      <h3 id="added-people-heading">Added People</h3>
+      <ul aria-labelledby="added-people-heading">
+        {groups.map((group) => (
+          <li key={group.group ?? UNDEFINED_GROUP}>
+            <>
+              <VisuallyHidden>Group </VisuallyHidden>
+              {group.group === null ? 'No Group' : group.group}
+            </>
+            <ul>
+              {group.people.map((p) => (
+                <li key={p.name}>
+                  {p.name} <RemoveButton onClick={() => removePerson(p)} />
+                </li>
+              ))}
+            </ul>
+          </li>
+        ))}
+      </ul>
+    </>
   );
 }

@@ -64,3 +64,18 @@
 a {
   text-decoration-skip-ink: auto;
 }
+
+button.muted {
+  background: none;
+  border: 1px solid var(--nc-bg-3);
+  color: var(--nc-tx-1);
+  line-height: 0;
+  vertical-align: middle;
+  padding: 6px;
+}
+button.muted:hover {
+  background: var(--nc-bg-2);
+}
+button.muted:active {
+  background: var(--nc-bg-3);
+}

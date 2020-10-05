@@ -6,8 +6,8 @@ import { ErrorMessage } from '@hookform/error-message';
 import { ValidationError } from '../common/ValidationError';
 
 type FormValues = {
-  name: string;
-  group: string;
+  ['person-name']: string;
+  ['person-group']: string;
 };
 
 interface Props {
@@ -20,8 +20,8 @@ export const PersonForm = ({ usedNames, usedGroups, onSubmit }: Props) => {
   const { errors, handleSubmit, register, reset } = useForm();
   const submitHandler: SubmitHandler<FormValues> = (data) => {
     onSubmit({
-      name: data.name,
-      group: data.group === '' ? undefined : data.group,
+      name: data['person-name'],
+      group: data['person-group'] === '' ? undefined : data['person-group'],
     });
     reset();
   };
@@ -30,12 +30,12 @@ export const PersonForm = ({ usedNames, usedGroups, onSubmit }: Props) => {
     <form onSubmit={handleSubmit(submitHandler)}>
       <fieldset>
         <legend>Add a New Person</legend>
-        <label htmlFor="name" className="label-required">
+        <label htmlFor="person-name" className="label-required">
           Name
         </label>
         <input
-          id="name"
-          name="name"
+          id="person-name"
+          name="person-name"
           type="text"
           ref={register({
             required: 'A name is required',
@@ -44,12 +44,12 @@ export const PersonForm = ({ usedNames, usedGroups, onSubmit }: Props) => {
               'The name must be unique',
           })}
         />
-        <ErrorMessage errors={errors} name="name" as={ValidationError} />
+        <ErrorMessage errors={errors} name="person-name" as={ValidationError} />
 
-        <label htmlFor="group">Group</label>
+        <label htmlFor="person-group">Group</label>
         <input
-          id="group"
-          name="group"
+          id="person-group"
+          name="person-group"
           type="text"
           list="groupOptions"
           autoComplete="off"
@@ -62,7 +62,8 @@ export const PersonForm = ({ usedNames, usedGroups, onSubmit }: Props) => {
         </datalist>
         <p className="meta">
           Use groups for simple exclusions to prevent people in the same group
-          from matching with each other.
+          from matching with each other. For example, people in the same family
+          or household.
         </p>
         <button type="submit">Add Person</button>
       </fieldset>

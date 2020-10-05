@@ -35,9 +35,14 @@ export const ExclusionForm = ({
   const excludedType = watch('excludedType', 'name');
 
   return (
-    <form onSubmit={handleSubmit(submitHandler)}>
-      <p>A Source will not be matched with the Excluded.</p>
-      <fieldset>
+    <form
+      onSubmit={handleSubmit(submitHandler)}
+      style={{ display: 'flex', flexWrap: 'wrap' }}
+    >
+      <p style={{ flex: '1 0 100%' }}>
+        A Source will not be matched with the Excluded.
+      </p>
+      <fieldset style={{ flex: '1 0 auto' }}>
         <legend>Source</legend>
         <label>
           <input
@@ -83,7 +88,7 @@ export const ExclusionForm = ({
         </select>
         <ErrorMessage errors={errors} name="subject" as={ValidationError} />
       </fieldset>
-      <fieldset>
+      <fieldset style={{ flex: '1 0 auto' }}>
         <legend>Excluded</legend>
         <label>
           <input
@@ -139,7 +144,9 @@ export const ExclusionForm = ({
           as={ValidationError}
         />
       </fieldset>
-      <button type="submit">Add Exclusion</button>
+      <div style={{ flex: '0 0 100%' }}>
+        <button type="submit">Add Exclusion</button>
+      </div>
     </form>
   );
 };
