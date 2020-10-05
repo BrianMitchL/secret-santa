@@ -54,22 +54,20 @@ export function Matches({ people, exclusions }: Props) {
 
   const calculateMatches = async () => {
     setError(null);
-    workerFn(people, exclusions)
-      .then((matches) => {
-        setPairs(matches);
-      })
-      .catch((e) => {
-        if (e.message.startsWith('DerangementError')) {
-          setError(
-            new Error(
-              'No matches are possible with the given people and exclusions.'
-            )
-          );
-        } else {
-          setError(e);
-        }
-        setPairs([]);
-      });
+    try {
+      setPairs(await workerFn(people, exclusions));
+    } catch (e) {
+      if (e.message.startsWith('DerangementError')) {
+        setError(
+          new Error(
+            'No matches are possible with the given people and exclusions.'
+          )
+        );
+      } else {
+        setError(e);
+      }
+      setPairs([]);
+    }
   };
 
   return (
