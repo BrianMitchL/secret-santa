@@ -17,6 +17,9 @@ const giftExchangeUmdPath =
     ? '/gift-exchange.umd.production.min.js'
     : '/gift-exchange.umd.development.js');
 
+const errorMessage =
+  'No matches are possible with the given people and exclusions, or there was an error with the matching Worker. Please try again or change your configuration to allow everyone to match with someone.';
+
 export function Matches({ people, exclusions }: Props) {
   const [pairs, setPairs] = React.useState<[Person, Person][]>([]);
   const [error, setError] = React.useState<null | Error>(null);
@@ -37,11 +40,7 @@ export function Matches({ people, exclusions }: Props) {
 
   React.useEffect(() => {
     if (workerStatus === 'ERROR') {
-      setError(
-        new Error(
-          'There was an error with the matching Worker, please try again.'
-        )
-      );
+      setError(new Error(errorMessage));
     }
   }, [workerStatus]);
 
@@ -57,15 +56,8 @@ export function Matches({ people, exclusions }: Props) {
     try {
       setPairs(await workerFn(people, exclusions));
     } catch (e) {
-      if (e.message.startsWith('DerangementError')) {
-        setError(
-          new Error(
-            'No matches are possible with the given people and exclusions.'
-          )
-        );
-      } else {
-        setError(e);
-      }
+      console.error(e);
+      setError(new Error(errorMessage));
       setPairs([]);
     }
   };
@@ -87,7 +79,7 @@ export function Matches({ people, exclusions }: Props) {
         />{' '}
         Show Groups
       </label>
-      {error && <span className="error">{error.message}</span>}
+      {error && <p className="error">{error.message}</p>}
       <Pairs pairs={error ? [] : pairs} showGroups={showGroups} />
     </>
   );
