@@ -8,7 +8,7 @@ interface Props {
 
 export function RemoveButton({ onClick }: Props) {
   return (
-    <button onClick={onClick} className="muted" title="Remove">
+    <button onClick={onClick} className="muted" title="Remove" type="button">
       <VisuallyHidden>Remove</VisuallyHidden>
       <X aria-hidden />
     </button>

@@ -26,21 +26,24 @@ export function People({ people, removePerson }: PeopleListProps) {
     <>
       <h3 id="added-people-heading">Added People</h3>
       <ul aria-labelledby="added-people-heading">
-        {groups.map((group) => (
-          <li key={group.group ?? UNDEFINED_GROUP}>
-            <>
-              <VisuallyHidden>Group </VisuallyHidden>
-              {group.group === null ? 'No Group' : group.group}
-            </>
-            <ul>
-              {group.people.map((p) => (
-                <li key={p.name}>
-                  {p.name} <RemoveButton onClick={() => removePerson(p)} />
-                </li>
-              ))}
-            </ul>
-          </li>
-        ))}
+        {groups.map((group) => {
+          const groupId = `person-group-${group.group ?? UNDEFINED_GROUP}`;
+          return (
+            <li key={groupId}>
+              <span id={groupId}>
+                <VisuallyHidden>Group </VisuallyHidden>
+                {group.group === null ? 'No Group' : group.group}
+              </span>
+              <ul aria-labelledby={groupId}>
+                {group.people.map((p) => (
+                  <li key={p.name}>
+                    {p.name} <RemoveButton onClick={() => removePerson(p)} />
+                  </li>
+                ))}
+              </ul>
+            </li>
+          );
+        })}
       </ul>
     </>
   );
