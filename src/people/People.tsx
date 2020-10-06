@@ -2,6 +2,7 @@ import * as React from 'react';
 import { Person } from 'gift-exchange';
 import VisuallyHidden from '@reach/visually-hidden';
 import { RemoveButton } from '../common/RemoveButton';
+import { mapPeopleByGroup } from './map-people-by-group';
 
 /*
  we need to key on something when rendering the list of groups,
@@ -15,27 +16,11 @@ interface PeopleListProps {
 }
 
 export function People({ people, removePerson }: PeopleListProps) {
+  const groups = React.useMemo(() => mapPeopleByGroup(people), [people]);
+
   if (!people.length) {
     return null;
   }
-
-  const groups = people.reduce<
-    Array<{
-      group: string | null;
-      people: Person[];
-    }>
-  >((acc, person) => {
-    const group = acc.find((item) => item.group === (person.group ?? null));
-    if (group) {
-      group.people.push(person);
-    } else {
-      acc.push({
-        group: person.group ?? null,
-        people: [person],
-      });
-    }
-    return acc;
-  }, []);
 
   return (
     <>
