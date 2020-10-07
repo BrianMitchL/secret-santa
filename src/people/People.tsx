@@ -1,5 +1,8 @@
 import * as React from 'react';
 import { Person } from 'gift-exchange';
+import VisuallyHidden from '@reach/visually-hidden';
+import { RemoveButton } from '../common/RemoveButton';
+import { mapPeopleByGroup } from './map-people-by-group';
 
 /*
  we need to key on something when rendering the list of groups,
@@ -13,38 +16,35 @@ interface PeopleListProps {
 }
 
 export function People({ people, removePerson }: PeopleListProps) {
-  const groups = people.reduce<
-    Array<{
-      group: string | null;
-      people: Person[];
-    }>
-  >((acc, person) => {
-    const group = acc.find((item) => item.group === (person.group ?? null));
-    if (group) {
-      group.people.push(person);
-    } else {
-      acc.push({
-        group: person.group ?? null,
-        people: [person],
-      });
-    }
-    return acc;
-  }, []);
+  const groups = React.useMemo(() => mapPeopleByGroup(people), [people]);
+
+  if (!people.length) {
+    return null;
+  }
 
   return (
-    <dl>
-      {groups.map((group) => (
-        <React.Fragment key={group.group ?? UNDEFINED_GROUP}>
-          <dt>
-            {group.group === null ? <strong>No Group</strong> : group.group}
-          </dt>
-          {group.people.map((p) => (
-            <dd key={p.name}>
-              {p.name} <button onClick={() => removePerson(p)}>Remove</button>
-            </dd>
-          ))}
-        </React.Fragment>
-      ))}
-    </dl>
+    <>
+      <h3 id="added-people-heading">Added People</h3>
+      <ul aria-labelledby="added-people-heading">
+        {groups.map((group) => {
+          const groupId = `person-group-${group.group ?? UNDEFINED_GROUP}`;
+          return (
+            <li key={groupId}>
+              <span id={groupId}>
+                <VisuallyHidden>Group </VisuallyHidden>
+                {group.group === null ? 'No Group' : group.group}
+              </span>
+              <ul aria-labelledby={groupId}>
+                {group.people.map((p) => (
+                  <li key={p.name}>
+                    {p.name} <RemoveButton onClick={() => removePerson(p)} />
+                  </li>
+                ))}
+              </ul>
+            </li>
+          );
+        })}
+      </ul>
+    </>
   );
 }

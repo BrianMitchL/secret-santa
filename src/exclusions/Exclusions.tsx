@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { EnhancedExclusion } from '../Main';
+import { RemoveButton } from '../common/RemoveButton';
 
 interface Props {
   exclusions: EnhancedExclusion[];
@@ -12,36 +13,56 @@ interface ExclusionItemProps {
 }
 
 const ExclusionItem = ({ exclusion, removeHandler }: ExclusionItemProps) => (
-  <dd>
+  <li>
     <strong>{exclusion.subject}</strong> cannot give to{' '}
     {exclusion.excludedType === 'group' && 'group '}
     <strong>{exclusion.excludedSubject}</strong>{' '}
-    <button onClick={removeHandler}>Remove</button>
-  </dd>
+    <RemoveButton onClick={removeHandler} />
+  </li>
 );
 
 export function Exclusions({ exclusions, removeExclusion }: Props) {
+  if (!exclusions.length) {
+    return null;
+  }
+
   const names = exclusions.filter((e) => e.type === 'name');
   const groups = exclusions.filter((e) => e.type === 'group');
 
   return (
-    <dl>
-      {names.length > 0 && <dt>Person</dt>}
-      {names.map((e) => (
-        <ExclusionItem
-          key={e.key}
-          exclusion={e}
-          removeHandler={() => removeExclusion(e.key)}
-        />
-      ))}
-      {groups.length > 0 && <dt>Group</dt>}
-      {groups.map((e) => (
-        <ExclusionItem
-          key={e.key}
-          exclusion={e}
-          removeHandler={() => removeExclusion(e.key)}
-        />
-      ))}
-    </dl>
+    <>
+      <h3 id="added-exclusions-heading">Added Exclusions</h3>
+      <ul aria-labelledby="added-exclusions-heading">
+        {names.length > 0 && (
+          <li>
+            Person
+            <ul>
+              {names.map((e) => (
+                <ExclusionItem
+                  key={e.key}
+                  exclusion={e}
+                  removeHandler={() => removeExclusion(e.key)}
+                />
+              ))}
+            </ul>
+          </li>
+        )}
+
+        {groups.length > 0 && (
+          <li>
+            Group
+            <ul>
+              {groups.map((e) => (
+                <ExclusionItem
+                  key={e.key}
+                  exclusion={e}
+                  removeHandler={() => removeExclusion(e.key)}
+                />
+              ))}
+            </ul>
+          </li>
+        )}
+      </ul>
+    </>
   );
 }

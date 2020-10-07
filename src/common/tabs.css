@@ -6,6 +6,7 @@
   display: flex;
   justify-content: space-evenly;
   position: relative;
+  margin-bottom: 1rem;
 }
 
 [data-reach-tab-list]::before {
