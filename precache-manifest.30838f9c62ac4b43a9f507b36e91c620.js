@@ -1,27 +1,27 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "6700e9ca2e3dbcea12a8cce263f865d2",
+    "revision": "b204af2bba4945b39dd24141a8826290",
     "url": "/secret-santa/index.html"
   },
   {
-    "revision": "97360d4ab6e7ef7e26f8",
+    "revision": "b9f95f3cdd97cd50a154",
     "url": "/secret-santa/static/css/2.2a63d546.chunk.css"
   },
   {
-    "revision": "987611599ee370dede33",
-    "url": "/secret-santa/static/css/main.b4b24f3c.chunk.css"
+    "revision": "52c92ea91cbe17f5ac40",
+    "url": "/secret-santa/static/css/main.3759e211.chunk.css"
   },
   {
-    "revision": "97360d4ab6e7ef7e26f8",
-    "url": "/secret-santa/static/js/2.f6df1f41.chunk.js"
+    "revision": "b9f95f3cdd97cd50a154",
+    "url": "/secret-santa/static/js/2.0574b620.chunk.js"
   },
   {
     "revision": "c97fb91e7dd1c7b19ae67fb152a2e6b2",
-    "url": "/secret-santa/static/js/2.f6df1f41.chunk.js.LICENSE.txt"
+    "url": "/secret-santa/static/js/2.0574b620.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "987611599ee370dede33",
-    "url": "/secret-santa/static/js/main.a50055eb.chunk.js"
+    "revision": "52c92ea91cbe17f5ac40",
+    "url": "/secret-santa/static/js/main.0ff63742.chunk.js"
   },
   {
     "revision": "ed2f97ad8324ae2cbc48",
@@ -182,5 +182,9 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
     "revision": "f065685b633569a6ec753c157b22a382",
     "url": "/secret-santa/static/media/Inter.var.f065685b.woff2"
+  },
+  {
+    "revision": "ef8f0651d42421329a6e638dbf9c4ab3",
+    "url": "/secret-santa/static/media/x.ef8f0651.svg"
   }
 ]);
