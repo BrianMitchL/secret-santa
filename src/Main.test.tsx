@@ -3,7 +3,9 @@ import { render, screen, queries, act } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { Main } from './Main';
 
-it('should add two persons', async () => {
+jest.mock('@koale/useworker', () => require('../__mocks__/@koale/useworker'));
+
+it('should add two persons and match them', async () => {
   render(<Main />);
 
   expect(screen.queryByRole('tab', { name: 'People' })).toHaveAttribute(
@@ -21,7 +23,7 @@ it('should add two persons', async () => {
     );
   });
 
-  await userEvent.click(
+  userEvent.click(
     queries.getByRole(peopleTabpanel, 'button', {
       name: 'Add Person',
     })
@@ -42,7 +44,7 @@ it('should add two persons', async () => {
     );
   });
 
-  await userEvent.click(
+  userEvent.click(
     queries.getByRole(peopleTabpanel, 'button', {
       name: 'Add Person',
     })
@@ -56,7 +58,13 @@ it('should add two persons', async () => {
     await queries.findByText(peopleTabpanel, /Test 2/)
   ).toBeInTheDocument();
 
-  await userEvent.click(screen.getByRole('tab', { name: 'Matches' }));
+  userEvent.click(screen.getByRole('tab', { name: 'Matches' }));
 
   expect(screen.queryByRole('button', { name: 'Match' })).toBeInTheDocument();
+
+  userEvent.click(screen.getByRole('button', { name: 'Match' }));
+
+  expect(
+    await screen.findByRole('table', { name: 'Secret Santa Matches' })
+  ).toHaveTextContent('Test 1Test 2Test 2Test 1');
 });
