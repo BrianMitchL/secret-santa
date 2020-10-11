@@ -68,3 +68,33 @@ it('should add two persons and match them', async () => {
     await screen.findByRole('table', { name: 'Secret Santa Matches' })
   ).toHaveTextContent('Test 1Test 2Test 2Test 1');
 });
+
+it('seeds with example data when clicking the fill with example data button', async () => {
+  render(<Main />);
+
+  expect(screen.queryByRole('tab', { name: 'Matches' })).toBeDisabled();
+  expect(screen.queryByLabelText('Added People')).not.toBeInTheDocument();
+
+  userEvent.click(
+    screen.getByRole('button', { name: /fill with example data/i })
+  );
+
+  const peopleTabpanel = screen.getByRole('tabpanel', { name: 'People' });
+  expect(queries.queryAllByRole(peopleTabpanel, 'listitem')).toHaveLength(15);
+
+  userEvent.click(
+    queries.getAllByRole(peopleTabpanel, 'button', { name: /remove/i })[0]
+  );
+
+  expect(queries.queryAllByRole(peopleTabpanel, 'listitem')).toHaveLength(14);
+
+  const seedButton = screen.getByRole('button', {
+    name: /fill with example data/i,
+  });
+  userEvent.click(seedButton);
+  expect(seedButton).toHaveTextContent(/are you sure/i);
+  expect(queries.queryAllByRole(peopleTabpanel, 'listitem')).toHaveLength(14);
+  userEvent.click(seedButton);
+  expect(seedButton).toHaveTextContent(/fill with example data/i);
+  expect(queries.queryAllByRole(peopleTabpanel, 'listitem')).toHaveLength(15);
+});

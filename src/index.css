@@ -79,3 +79,8 @@ button.muted:hover {
 button.muted:active {
   background: var(--nc-bg-3);
 }
+
+button.danger {
+  background: var(--nc-ac-2);
+  color: var(--nc-ac-tx);
+}
