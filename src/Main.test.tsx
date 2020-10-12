@@ -5,9 +5,10 @@ import { Main } from './Main';
 
 jest.mock('@koale/useworker', () => require('../__mocks__/@koale/useworker'));
 
-it('should add two persons and match them', async () => {
+it('should add two persons, add and remove an exclusion, and match them', async () => {
   render(<Main />);
 
+  // People
   expect(screen.queryByRole('tab', { name: 'People' })).toHaveAttribute(
     'aria-selected',
     'true'
@@ -58,6 +59,49 @@ it('should add two persons and match them', async () => {
     await queries.findByText(peopleTabpanel, /Test 2/)
   ).toBeInTheDocument();
 
+  // Exclusions
+  userEvent.click(screen.getByRole('tab', { name: 'Exclusions' }));
+
+  const source = screen.getByRole('group', { name: /source/i });
+  expect(queries.queryByRole(source, 'radio', { name: /name/i })).toBeChecked();
+  expect(queries.queryByLabelText(source, 'Subject')).toHaveValue('Test 1');
+  userEvent.selectOptions(queries.getByLabelText(source, 'Subject'), [
+    'Test 2',
+  ]);
+  expect(queries.queryByLabelText(source, 'Subject')).toHaveValue('Test 2');
+
+  const excluded = screen.getByRole('group', { name: /excluded/i });
+  expect(
+    queries.queryByRole(excluded, 'radio', { name: /name/i })
+  ).toBeChecked();
+  expect(queries.queryByLabelText(excluded, 'Subject')).toHaveValue('Test 1');
+  userEvent.selectOptions(queries.getByLabelText(excluded, 'Subject'), [
+    'Test 2',
+  ]);
+  expect(queries.queryByLabelText(excluded, 'Subject')).toHaveValue('Test 2');
+
+  userEvent.click(
+    screen.getByRole('button', {
+      name: 'Add Exclusion',
+    })
+  );
+
+  const addedExclusionsPersonList = await screen.findByRole('list', {
+    name: /person/i,
+  });
+
+  expect(addedExclusionsPersonList.textContent).toMatch(
+    /test 2 cannot give to test 2/i
+  );
+
+  userEvent.click(
+    queries.getByRole(addedExclusionsPersonList, 'button', { name: /remove/i })
+  );
+  expect(
+    screen.queryByRole('list', { name: /added exclusions/i })
+  ).not.toBeInTheDocument();
+
+  // Matches
   userEvent.click(screen.getByRole('tab', { name: 'Matches' }));
 
   expect(screen.queryByRole('button', { name: 'Match' })).toBeInTheDocument();
