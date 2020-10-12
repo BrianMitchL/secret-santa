@@ -9,6 +9,7 @@ import { ExclusionForm } from './exclusions/ExclusionForm';
 import { Section } from './common/Section';
 import { Tab, TabList, TabPanels, Tabs, TabPanel } from '@reach/tabs';
 import './common/tabs.css';
+import { Seed } from './Seed';
 
 export interface EnhancedExclusion extends Exclusion {
   key: string;
@@ -51,6 +52,18 @@ export function Main() {
 
   return (
     <main>
+      <section>
+        <p>
+          Create a matching of names for your gift exchange or Secret Santa. It
+          supports grouping of people as well as directional exclusions based on
+          the group or individual name to support all of your custom rules.
+        </p>
+        <Seed
+          setPeople={setPeople}
+          setExclusions={setExclusions}
+          clean={people.length + exclusions.length === 0}
+        />
+      </section>
       <Tabs>
         <TabList>
           <Tab>People</Tab>

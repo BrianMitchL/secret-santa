@@ -35,8 +35,8 @@ export function Exclusions({ exclusions, removeExclusion }: Props) {
       <ul aria-labelledby="added-exclusions-heading">
         {names.length > 0 && (
           <li>
-            Person
-            <ul>
+            <span id="added-exclusions-person">Person</span>
+            <ul aria-labelledby="added-exclusions-person">
               {names.map((e) => (
                 <ExclusionItem
                   key={e.key}
@@ -50,8 +50,8 @@ export function Exclusions({ exclusions, removeExclusion }: Props) {
 
         {groups.length > 0 && (
           <li>
-            Group
-            <ul>
+            <span id="added-exclusions-group">Group</span>
+            <ul aria-labelledby="added-exclusions-group">
               {groups.map((e) => (
                 <ExclusionItem
                   key={e.key}

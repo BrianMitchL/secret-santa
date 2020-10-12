@@ -37,6 +37,7 @@ export const PersonForm = ({ usedNames, usedGroups, onSubmit }: Props) => {
           id="person-name"
           name="person-name"
           type="text"
+          aria-required
           ref={register({
             required: 'A name is required',
             validate: (value) =>
