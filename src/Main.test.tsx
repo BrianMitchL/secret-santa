@@ -5,6 +5,10 @@ import { Main } from './Main';
 
 jest.mock('@koale/useworker', () => require('../__mocks__/@koale/useworker'));
 
+beforeEach(() => {
+  localStorage.clear();
+});
+
 it('should add two persons, add and remove an exclusion, and match them', async () => {
   render(<Main />);
 
@@ -113,11 +117,15 @@ it('should add two persons, add and remove an exclusion, and match them', async 
   ).toHaveTextContent('Test 1Test 2Test 2Test 1');
 });
 
-it('seeds with example data when clicking the fill with example data button', async () => {
+it('seeds with example data when clicking the fill with example data button and clears with when clicking clear', async () => {
   render(<Main />);
 
   expect(screen.queryByRole('tab', { name: 'Matches' })).toBeDisabled();
   expect(screen.queryByLabelText('Added People')).not.toBeInTheDocument();
+  expect(
+    screen.queryByRole('button', { name: /fill with example data/i })
+  ).not.toBeDisabled();
+  expect(screen.queryByRole('button', { name: /clear/i })).toBeInTheDocument();
 
   userEvent.click(
     screen.getByRole('button', { name: /fill with example data/i })
@@ -132,13 +140,14 @@ it('seeds with example data when clicking the fill with example data button', as
 
   expect(queries.queryAllByRole(peopleTabpanel, 'listitem')).toHaveLength(14);
 
-  const seedButton = screen.getByRole('button', {
-    name: /fill with example data/i,
-  });
-  userEvent.click(seedButton);
-  expect(seedButton).toHaveTextContent(/are you sure/i);
-  expect(queries.queryAllByRole(peopleTabpanel, 'listitem')).toHaveLength(14);
-  userEvent.click(seedButton);
-  expect(seedButton).toHaveTextContent(/fill with example data/i);
-  expect(queries.queryAllByRole(peopleTabpanel, 'listitem')).toHaveLength(15);
+  expect(
+    screen.queryByRole('button', { name: /fill with example data/i })
+  ).toBeDisabled();
+
+  userEvent.click(
+    screen.getByRole('button', {
+      name: /clear/i,
+    })
+  );
+  expect(queries.queryAllByRole(peopleTabpanel, 'listitem')).toHaveLength(0);
 });

@@ -1,7 +1,12 @@
-import { Exclusion, Person } from 'gift-exchange';
+import { Exclusion, Person, calculateSync } from 'gift-exchange';
+
+declare global {
+  var GiftExchange: {
+    calculateSync: typeof calculateSync;
+  };
+}
 
 function matchPairs(people: Person[], exclusions?: Exclusion[]) {
-  // @ts-ignore
   return (GiftExchange.calculateSync(people, {
     exclusions,
     timeout: 5000,

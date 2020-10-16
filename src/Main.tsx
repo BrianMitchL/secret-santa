@@ -10,6 +10,7 @@ import { Section } from './common/Section';
 import { Tab, TabList, TabPanels, Tabs, TabPanel } from '@reach/tabs';
 import './common/tabs.css';
 import { Seed } from './Seed';
+import { useStoredState } from './common/useStoredState';
 
 export interface EnhancedExclusion extends Exclusion {
   key: string;
@@ -18,8 +19,14 @@ export interface EnhancedExclusion extends Exclusion {
 const isString = (str: unknown): str is string => typeof str === 'string';
 
 export function Main() {
-  const [people, setPeople] = React.useState<Person[]>([]);
-  const [exclusions, setExclusions] = React.useState<EnhancedExclusion[]>([]);
+  const [people, setPeople] = useStoredState<Person[]>(
+    'secret-santa-people',
+    []
+  );
+  const [exclusions, setExclusions] = useStoredState<EnhancedExclusion[]>(
+    'secret-santa-exclusions',
+    []
+  );
 
   const usedNames = React.useMemo(() => people.map((p) => p.name), [people]);
   const usedGroups = React.useMemo(
@@ -50,6 +57,11 @@ export function Main() {
     );
   };
 
+  const clear = () => {
+    setPeople([]);
+    setExclusions([]);
+  };
+
   return (
     <main>
       <section>
@@ -61,8 +73,11 @@ export function Main() {
         <Seed
           setPeople={setPeople}
           setExclusions={setExclusions}
-          clean={people.length + exclusions.length === 0}
-        />
+          disabled={people.length + exclusions.length !== 0}
+        />{' '}
+        <button className="danger" onClick={clear}>
+          Clear
+        </button>
       </section>
       <Tabs>
         <TabList>
