@@ -1,6 +1,8 @@
 import { Dispatch, SetStateAction, useEffect, useState } from 'react';
 
-export const useStoredState = <S extends string | number | null | {} | []>(
+export const useStoredState = <
+  S extends string | number | boolean | null | {} | []
+>(
   key: string,
   defaultValue: S
 ): [S, Dispatch<SetStateAction<S>>] => {
