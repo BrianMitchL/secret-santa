@@ -13,48 +13,38 @@ const names = Array.from(Array(12).keys()).map((num) => {
 interface Props {
   setPeople: (people: Person[]) => void;
   setExclusions: (exclusions: EnhancedExclusion[]) => void;
-  clean: boolean;
+  disabled?: boolean;
 }
 
-export function Seed({ setPeople, setExclusions, clean }: Props) {
-  const [pendingConfirm, setPendingConfirm] = React.useState(false);
-
+export function Seed({ setPeople, setExclusions, disabled }: Props) {
   const handleClick = () => {
-    if (clean || pendingConfirm) {
-      setPeople(
-        names.map((name, index) => ({
-          name,
-          group: (Math.floor(index % 3) + 1).toString(),
-        }))
-      );
+    setPeople(
+      names.map((name, index) => ({
+        name,
+        group: (Math.floor(index % 3) + 1).toString(),
+      }))
+    );
 
-      const es: Exclusion[] = [
-        {
-          type: 'group',
-          subject: '1',
-          excludedType: 'name',
-          excludedSubject: names[1],
-        },
-        {
-          type: 'name',
-          subject: names[5],
-          excludedType: 'group',
-          excludedSubject: '2',
-        },
-      ];
-      setExclusions(es.map((e) => ({ ...e, key: exclusionKey(e) })));
-    }
-
-    setPendingConfirm((prevState) => (!clean ? !prevState : false));
+    const es: Exclusion[] = [
+      {
+        type: 'group',
+        subject: '1',
+        excludedType: 'name',
+        excludedSubject: names[1],
+      },
+      {
+        type: 'name',
+        subject: names[5],
+        excludedType: 'group',
+        excludedSubject: '2',
+      },
+    ];
+    setExclusions(es.map((e) => ({ ...e, key: exclusionKey(e) })));
   };
 
   return (
-    <button
-      onClick={handleClick}
-      type="button"
-      className={pendingConfirm ? 'danger' : ''}
-    >
-      {pendingConfirm ? 'Are you sure?' : 'Fill with example data'}
+    <button onClick={handleClick} type="button" disabled={disabled}>
+      Fill with Example Data
     </button>
   );
 }
