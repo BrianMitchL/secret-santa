@@ -1,4 +1,3 @@
-import * as React from 'react';
 import { Exclusion, Person } from 'gift-exchange';
 import { exclusionKey } from './common/utils';
 import { EnhancedExclusion } from './Main';

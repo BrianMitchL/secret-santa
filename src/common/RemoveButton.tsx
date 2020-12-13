@@ -1,4 +1,4 @@
-import React, { MouseEventHandler } from 'react';
+import { MouseEventHandler } from 'react';
 import VisuallyHidden from '@reach/visually-hidden';
 import { ReactComponent as X } from './x.svg';
 

@@ -1,4 +1,4 @@
-import * as React from 'react';
+import { useMemo } from 'react';
 import { PersonForm } from './people/PersonForm';
 import { People } from './people/People';
 import { Exclusion, Person } from 'gift-exchange';
@@ -28,12 +28,12 @@ export function Main() {
     []
   );
 
-  const usedNames = React.useMemo(() => people.map((p) => p.name), [people]);
-  const usedGroups = React.useMemo(
+  const usedNames = useMemo(() => people.map((p) => p.name), [people]);
+  const usedGroups = useMemo(
     () => [...new Set(people.map((p) => p.group).filter(isString))],
     [people]
   );
-  const usedExclusionKeys = React.useMemo(() => exclusions.map((e) => e.key), [
+  const usedExclusionKeys = useMemo(() => exclusions.map((e) => e.key), [
     exclusions,
   ]);
 

@@ -1,4 +1,3 @@
-import * as React from 'react';
 import { Person } from 'gift-exchange';
 
 interface Props {

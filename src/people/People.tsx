@@ -1,4 +1,4 @@
-import * as React from 'react';
+import { useMemo } from 'react';
 import { Person } from 'gift-exchange';
 import VisuallyHidden from '@reach/visually-hidden';
 import { RemoveButton } from '../common/RemoveButton';
@@ -16,7 +16,7 @@ interface PeopleListProps {
 }
 
 export function People({ people, removePerson }: PeopleListProps) {
-  const groups = React.useMemo(() => mapPeopleByGroup(people), [people]);
+  const groups = useMemo(() => mapPeopleByGroup(people), [people]);
 
   if (!people.length) {
     return null;
