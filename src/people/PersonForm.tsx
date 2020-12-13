@@ -1,4 +1,3 @@
-import * as React from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import '../common/form.css';
 import { Person } from 'gift-exchange';

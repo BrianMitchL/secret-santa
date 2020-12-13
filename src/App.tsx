@@ -1,4 +1,4 @@
-import * as React from 'react';
+import { useEffect } from 'react';
 import { Main } from './Main';
 
 const emoji = [
@@ -16,8 +16,9 @@ const emoji = [
   '🤶🏿',
 ];
 const santa = emoji[Math.floor(Math.random() * emoji.length)];
+
 function App() {
-  React.useEffect(() => {
+  useEffect(() => {
     document.title = `Secret Santa ${santa}`;
   }, []);
 

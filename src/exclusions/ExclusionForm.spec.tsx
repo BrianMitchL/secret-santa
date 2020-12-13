@@ -1,4 +1,3 @@
-import React from 'react';
 import { queries, render, screen, waitFor } from '@testing-library/react';
 import { ExclusionForm } from './ExclusionForm';
 import userEvent from '@testing-library/user-event';

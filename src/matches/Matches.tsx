@@ -1,4 +1,4 @@
-import * as React from 'react';
+import { useEffect, useLayoutEffect, useState } from 'react';
 import { Exclusion, Person } from 'gift-exchange';
 import { useWorker } from '@koale/useworker';
 import { Pairs } from './Pairs';
@@ -21,12 +21,12 @@ const errorMessage =
   'No matches are possible with the given people and exclusions, or there was an error with the matching Worker. Please try again or change your configuration to allow everyone to match with someone.';
 
 export function Matches({ people, exclusions }: Props) {
-  const [pairs, setPairs] = React.useState<[Person, Person][]>([]);
-  const [error, setError] = React.useState<null | Error>(null);
-  const [showGroups, setShowGroups] = React.useState(false);
+  const [pairs, setPairs] = useState<[Person, Person][]>([]);
+  const [error, setError] = useState<null | Error>(null);
+  const [showGroups, setShowGroups] = useState(false);
 
   // needs to be a layout effect to prevent flashing when changing people
-  React.useLayoutEffect(() => {
+  useLayoutEffect(() => {
     setPairs([]);
   }, [people, exclusions]);
 
@@ -38,13 +38,13 @@ export function Matches({ people, exclusions }: Props) {
     }
   );
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (workerStatus === 'ERROR') {
       setError(new Error(errorMessage));
     }
   }, [workerStatus]);
 
-  React.useEffect(
+  useEffect(
     () => () => {
       terminateWorker();
     },

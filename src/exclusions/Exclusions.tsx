@@ -1,4 +1,3 @@
-import * as React from 'react';
 import { EnhancedExclusion } from '../Main';
 import { RemoveButton } from '../common/RemoveButton';
 
