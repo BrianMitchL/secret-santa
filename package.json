@@ -15,7 +15,7 @@
     "@types/react": "^17.0.1",
     "@types/react-dom": "^17.0.0",
     "cpx": "^1.5.0",
-    "gift-exchange": "^2.1.0",
+    "gift-exchange": "^3.0.0",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "react-hook-form": "^6.15.1",
@@ -24,7 +24,7 @@
     "typescript": "~4.1.3"
   },
   "scripts": {
-    "postinstall": "cpx 'node_modules/gift-exchange/dist/gift-exchange.umd.*' public",
+    "postinstall": "cpx 'node_modules/gift-exchange/dist/giftexchange.umd.*' public",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test"

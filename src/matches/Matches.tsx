@@ -14,8 +14,8 @@ const giftExchangeUmdPath =
   window.location.origin +
   process.env.PUBLIC_URL +
   (process.env.NODE_ENV === 'production'
-    ? '/gift-exchange.umd.production.min.js'
-    : '/gift-exchange.umd.development.js');
+    ? '/giftexchange.umd.production.min.js'
+    : '/giftexchange.umd.development.js');
 
 const errorMessage =
   'No matches are possible with the given people and exclusions, or there was an error with the matching Worker. Please try again or change your configuration to allow everyone to match with someone.';

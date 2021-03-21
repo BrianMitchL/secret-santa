@@ -1,8 +1,8 @@
-import { calculateSync, Person } from 'gift-exchange';
+import { calculate, Person } from 'gift-exchange';
 
 beforeEach(() => {
   globalThis.GiftExchange = {
-    calculateSync: jest.fn().mockImplementation(calculateSync),
+    calculate: jest.fn().mockImplementation(calculate),
   };
 });
 

@@ -28,4 +28,4 @@ yarn-error.log*
 .vscode
 
 # unbundled dependencies pulled in during Deploy step
-public/gift-exchange.umd.*
+public/giftexchange.umd.*

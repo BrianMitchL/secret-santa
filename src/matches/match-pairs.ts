@@ -1,13 +1,13 @@
-import { Exclusion, Person, calculateSync } from 'gift-exchange';
+import { Exclusion, Person, calculate } from 'gift-exchange';
 
 declare global {
   var GiftExchange: {
-    calculateSync: typeof calculateSync;
+    calculate: typeof calculate;
   };
 }
 
 function matchPairs(people: Person[], exclusions?: Exclusion[]) {
-  return (GiftExchange.calculateSync(people, {
+  return (GiftExchange.calculate(people, {
     exclusions,
     timeout: 5000,
   }) as Person[]).map<[Person, Person]>((p, i) => [people[i], p]);
