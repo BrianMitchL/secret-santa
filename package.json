@@ -7,21 +7,21 @@
   "dependencies": {
     "@exampledev/new.css": "^1.1.3",
     "@hookform/error-message": "0.0.5",
-    "@koale/useworker": "^4.0.1",
-    "@reach/tabs": "^0.13.2",
-    "@reach/visually-hidden": "^0.13.2",
-    "@types/jest": "^26.0.21",
-    "@types/node": "^14.14.35",
-    "@types/react": "^17.0.3",
-    "@types/react-dom": "^17.0.2",
+    "@koale/useworker": "^4.0.2",
+    "@reach/tabs": "^0.15.0",
+    "@reach/visually-hidden": "^0.15.0",
+    "@types/jest": "^26.0.23",
+    "@types/node": "^14.14.45",
+    "@types/react": "^17.0.5",
+    "@types/react-dom": "^17.0.5",
     "cpx": "^1.5.0",
     "gift-exchange": "^3.0.0",
-    "react": "^17.0.1",
-    "react-dom": "^17.0.1",
-    "react-hook-form": "^6.15.5",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "react-hook-form": "^6.15.7",
     "react-scripts": "^4.0.3",
     "typeface-inter": "^3.15.1",
-    "typescript": "~4.2.3"
+    "typescript": "~4.2.4"
   },
   "scripts": {
     "postinstall": "cpx 'node_modules/gift-exchange/dist/giftexchange.umd.*' public",
@@ -49,13 +49,13 @@
     ]
   },
   "devDependencies": {
-    "@testing-library/jest-dom": "^5.11.9",
-    "@testing-library/react": "^11.2.5",
-    "@testing-library/user-event": "^13.0.6",
+    "@testing-library/jest-dom": "^5.12.0",
+    "@testing-library/react": "^11.2.7",
+    "@testing-library/user-event": "^13.1.9",
     "jest-environment-jsdom-sixteen": "^1.0.3",
-    "prettier": "^2.2.1",
+    "prettier": "^2.3.0",
     "pretty-quick": "^3.1.0",
-    "simple-git-hooks": "^2.0.3"
+    "simple-git-hooks": "^2.4.1"
   },
   "prettier": {
     "singleQuote": true

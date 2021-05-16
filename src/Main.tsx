@@ -33,9 +33,10 @@ export function Main() {
     () => [...new Set(people.map((p) => p.group).filter(isString))],
     [people]
   );
-  const usedExclusionKeys = useMemo(() => exclusions.map((e) => e.key), [
-    exclusions,
-  ]);
+  const usedExclusionKeys = useMemo(
+    () => exclusions.map((e) => e.key),
+    [exclusions]
+  );
 
   const addPerson = (person: Person) => {
     setPeople((prev) => prev.concat(person));
