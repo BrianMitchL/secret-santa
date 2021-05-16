@@ -16,7 +16,12 @@ interface Props {
 }
 
 export const PersonForm = ({ usedNames, usedGroups, onSubmit }: Props) => {
-  const { errors, handleSubmit, register, reset } = useForm();
+  const {
+    handleSubmit,
+    register,
+    reset,
+    formState: { errors },
+  } = useForm();
   const submitHandler: SubmitHandler<FormValues> = (data) => {
     onSubmit({
       name: data['person-name'],
@@ -34,26 +39,25 @@ export const PersonForm = ({ usedNames, usedGroups, onSubmit }: Props) => {
         </label>
         <input
           id="person-name"
-          name="person-name"
-          type="text"
-          aria-required
-          ref={register({
+          {...register('person-name', {
             required: 'A name is required',
             validate: (value) =>
               (value && !usedNames.includes(value)) ||
               'The name must be unique',
           })}
+          type="text"
+          aria-required
+          aria-invalid={errors['person-name'] ? 'true' : 'false'}
         />
         <ErrorMessage errors={errors} name="person-name" as={ValidationError} />
 
         <label htmlFor="person-group">Group</label>
         <input
           id="person-group"
-          name="person-group"
+          {...register('person-group')}
           type="text"
           list="groupOptions"
           autoComplete="off"
-          ref={register}
         />
         <datalist id="groupOptions">
           {usedGroups.map((group) => (
