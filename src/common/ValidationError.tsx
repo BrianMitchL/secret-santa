@@ -5,5 +5,9 @@ interface Props {
 }
 
 export function ValidationError({ children }: Props) {
-  return <span className="validation">{children}</span>;
+  return (
+    <span className="validation" role="alert">
+      {children}
+    </span>
+  );
 }

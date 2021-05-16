@@ -20,7 +20,14 @@ export const ExclusionForm = ({
   usedExclusionKeys,
   onSubmit,
 }: Props) => {
-  const { errors, handleSubmit, register, reset, setError, watch } = useForm();
+  const {
+    handleSubmit,
+    register,
+    reset,
+    setError,
+    watch,
+    formState: { errors },
+  } = useForm<FormValues>();
   const submitHandler: SubmitHandler<FormValues> = (data) => {
     if (usedExclusionKeys.includes(exclusionKey(data))) {
       setError('excludedSubject', { message: 'This exclusion already exists' });
@@ -46,23 +53,21 @@ export const ExclusionForm = ({
         <label>
           <input
             type="radio"
-            name="type"
-            value="name"
-            defaultChecked
-            ref={register({
+            {...register('type', {
               required: 'A type is required',
             })}
+            value="name"
+            defaultChecked
           />{' '}
           Name
         </label>
         <label>
           <input
             type="radio"
-            name="type"
-            value="group"
-            ref={register({
+            {...register('type', {
               required: 'A type is required',
             })}
+            value="group"
           />{' '}
           Group
         </label>
@@ -71,15 +76,14 @@ export const ExclusionForm = ({
         <label htmlFor="subject">Subject</label>
         <select
           id="subject"
-          name="subject"
-          disabled={(type === 'name' ? usedNames : usedGroups).length < 1}
-          ref={register({
+          {...register('subject', {
             required: `A ${type} is required`,
             validate: (value) =>
               type === 'name'
                 ? usedNames.includes(value)
                 : usedGroups.includes(value),
           })}
+          disabled={(type === 'name' ? usedNames : usedGroups).length < 1}
         >
           {(type === 'name' ? usedNames : usedGroups).map((item) => (
             <option key={item}>{item}</option>
@@ -92,23 +96,21 @@ export const ExclusionForm = ({
         <label>
           <input
             type="radio"
-            name="excludedType"
-            value="name"
-            defaultChecked
-            ref={register({
+            {...register('excludedType', {
               required: 'A type is required',
             })}
+            value="name"
+            defaultChecked
           />{' '}
           Name
         </label>
         <label>
           <input
             type="radio"
-            name="excludedType"
-            value="group"
-            ref={register({
+            {...register('excludedType', {
               required: 'A type is required',
             })}
+            value="group"
           />{' '}
           Group
         </label>
@@ -121,17 +123,16 @@ export const ExclusionForm = ({
         <label htmlFor="excludedSubject">Subject</label>
         <select
           id="excludedSubject"
-          name="excludedSubject"
-          disabled={
-            (excludedType === 'name' ? usedNames : usedGroups).length < 1
-          }
-          ref={register({
+          {...register('excludedSubject', {
             required: `A ${excludedType} is required`,
             validate: (value) =>
               excludedType === 'name'
                 ? usedNames.includes(value)
                 : usedGroups.includes(value),
           })}
+          disabled={
+            (excludedType === 'name' ? usedNames : usedGroups).length < 1
+          }
         >
           {(excludedType === 'name' ? usedNames : usedGroups).map((item) => (
             <option key={item}>{item}</option>
