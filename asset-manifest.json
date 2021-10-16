@@ -6,19 +6,19 @@
     "runtime-main.js": "/secret-santa/static/js/runtime-main.7500a572.js",
     "runtime-main.js.map": "/secret-santa/static/js/runtime-main.7500a572.js.map",
     "static/css/2.ffcaf763.chunk.css": "/secret-santa/static/css/2.ffcaf763.chunk.css",
-    "static/js/2.23d59aa3.chunk.js": "/secret-santa/static/js/2.23d59aa3.chunk.js",
-    "static/js/2.23d59aa3.chunk.js.map": "/secret-santa/static/js/2.23d59aa3.chunk.js.map",
+    "static/js/2.dc5dd707.chunk.js": "/secret-santa/static/js/2.dc5dd707.chunk.js",
+    "static/js/2.dc5dd707.chunk.js.map": "/secret-santa/static/js/2.dc5dd707.chunk.js.map",
     "index.html": "/secret-santa/index.html",
     "static/css/2.ffcaf763.chunk.css.map": "/secret-santa/static/css/2.ffcaf763.chunk.css.map",
     "static/css/main.474246ac.chunk.css.map": "/secret-santa/static/css/main.474246ac.chunk.css.map",
-    "static/js/2.23d59aa3.chunk.js.LICENSE.txt": "/secret-santa/static/js/2.23d59aa3.chunk.js.LICENSE.txt",
+    "static/js/2.dc5dd707.chunk.js.LICENSE.txt": "/secret-santa/static/js/2.dc5dd707.chunk.js.LICENSE.txt",
     "static/media/inter.css": "/secret-santa/static/media/Inter.var.9df5db38.woff2",
     "static/media/x.89dd971e.svg": "/secret-santa/static/media/x.89dd971e.svg"
   },
   "entrypoints": [
     "static/js/runtime-main.7500a572.js",
     "static/css/2.ffcaf763.chunk.css",
-    "static/js/2.23d59aa3.chunk.js",
+    "static/js/2.dc5dd707.chunk.js",
     "static/css/main.474246ac.chunk.css",
     "static/js/main.35999988.chunk.js"
   ]
