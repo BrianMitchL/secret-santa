@@ -1,4 +1,4 @@
-import { act, render, screen, waitFor } from '@testing-library/react';
+import { render, screen, waitFor } from '@testing-library/react';
 import { PersonForm } from './PersonForm';
 import userEvent from '@testing-library/user-event';
 
@@ -19,7 +19,7 @@ const renderHelper = (
   const { usedNames = [], usedGroups = [] } = opts;
   const onSubmit = jest.fn();
 
-  const result = render(
+  const utils = render(
     <PersonForm
       usedNames={usedNames}
       usedGroups={usedGroups}
@@ -28,7 +28,7 @@ const renderHelper = (
   );
 
   return {
-    ...result,
+    ...utils,
     onSubmit,
   };
 };
@@ -39,9 +39,7 @@ it('submits a new person without a group', async () => {
   expect(screen.getByLabelText('Name')).toHaveValue('');
   expect(screen.getByLabelText('Group')).toHaveValue('');
 
-  await act(async () => {
-    await userEvent.type(screen.getByLabelText('Name'), 'Test 1');
-  });
+  await userEvent.type(screen.getByLabelText('Name'), 'Test 1');
 
   addPerson();
 
@@ -65,13 +63,9 @@ it('submits a new person with a group', async () => {
   expect(screen.getByText('Group A')).toBeInTheDocument();
   expect(screen.getByText('Group B')).toBeInTheDocument();
 
-  await act(async () => {
-    await userEvent.type(screen.getByLabelText('Name'), 'Test 1');
-  });
+  await userEvent.type(screen.getByLabelText('Name'), 'Test 1');
 
-  await act(async () => {
-    await userEvent.type(screen.getByLabelText('Group'), 'Group A');
-  });
+  await userEvent.type(screen.getByLabelText('Group'), 'Group A');
 
   addPerson();
 
@@ -91,21 +85,20 @@ it('validates that names are unique', async () => {
   expect(screen.getByLabelText('Name')).toHaveValue('');
   expect(screen.getByLabelText('Group')).toHaveValue('');
 
-  await act(async () => {
-    await userEvent.type(screen.getByLabelText('Name'), 'Test 1');
-  });
+  await userEvent.type(screen.getByLabelText('Name'), 'Test 1');
 
   addPerson();
 
   expect(screen.getByLabelText('Name')).toHaveValue('Test 1');
 
   await waitFor(() => expect(screen.getByLabelText('Name')).toHaveFocus());
-  expect(screen.queryByText('The name must be unique')).toBeInTheDocument();
+  expect(screen.getByText('The name must be unique')).toBeInTheDocument();
 
-  await act(async () => {
-    await userEvent.clear(screen.getByLabelText('Name'));
-    await userEvent.type(screen.getByLabelText('Name'), 'Test 2');
-  });
+  await userEvent.clear(screen.getByLabelText('Name'));
+
+  expect(await screen.findByText('A name is required')).toBeInTheDocument();
+
+  await userEvent.type(screen.getByLabelText('Name'), 'Test 2');
 
   addPerson();
 
