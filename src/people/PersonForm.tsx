@@ -21,7 +21,7 @@ export const PersonForm = ({ usedNames, usedGroups, onSubmit }: Props) => {
     register,
     reset,
     formState: { errors },
-  } = useForm();
+  } = useForm<FormValues>();
   const submitHandler: SubmitHandler<FormValues> = (data) => {
     onSubmit({
       name: data['person-name'],

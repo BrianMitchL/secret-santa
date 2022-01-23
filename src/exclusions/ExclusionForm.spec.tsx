@@ -1,4 +1,4 @@
-import { queries, render, screen, waitFor } from '@testing-library/react';
+import { render, screen, waitFor, within } from '@testing-library/react';
 import { ExclusionForm } from './ExclusionForm';
 import userEvent from '@testing-library/user-event';
 import { Exclusion } from 'gift-exchange';
@@ -8,23 +8,23 @@ const setExclusion = (exclusion: Exclusion) => {
   const groupSource = screen.getByRole('group', { name: /source/i });
 
   userEvent.click(
-    queries.getByRole(groupSource, 'radio', {
+    within(groupSource).getByRole('radio', {
       name: new RegExp(exclusion.type, 'i'),
     })
   );
   userEvent.selectOptions(
-    queries.getByRole(groupSource, 'combobox', { name: /subject/i }),
+    within(groupSource).getByRole('combobox', { name: /subject/i }),
     [exclusion.subject]
   );
 
   const groupExcluded = screen.getByRole('group', { name: /excluded/i });
   userEvent.click(
-    queries.getByRole(groupExcluded, 'radio', {
+    within(groupExcluded).getByRole('radio', {
       name: new RegExp(exclusion.excludedType, 'i'),
     })
   );
   userEvent.selectOptions(
-    queries.getByRole(groupExcluded, 'combobox', { name: /subject/i }),
+    within(groupExcluded).getByRole('combobox', { name: /subject/i }),
     [exclusion.excludedSubject]
   );
 };
@@ -43,7 +43,7 @@ const renderHelper = (
   } = opts;
   const onSubmit = jest.fn();
 
-  const result = render(
+  const utils = render(
     <ExclusionForm
       usedNames={usedNames}
       usedGroups={usedGroups}
@@ -53,7 +53,7 @@ const renderHelper = (
   );
 
   return {
-    ...result,
+    ...utils,
     onSubmit,
   };
 };
