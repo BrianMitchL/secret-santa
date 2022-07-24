@@ -41,7 +41,7 @@ const renderHelper = (
     usedGroups = ['Group A', 'Group B'],
     usedExclusionKeys = [],
   } = opts;
-  const onSubmit = jest.fn();
+  const onSubmit = vi.fn();
 
   const utils = render(
     <ExclusionForm

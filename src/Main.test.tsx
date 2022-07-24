@@ -2,7 +2,7 @@ import { render, screen, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { Main } from './Main';
 
-jest.mock('@koale/useworker', () => require('./useworker-mock'));
+vi.mock('@koale/useworker');
 
 beforeEach(() => {
   localStorage.clear();

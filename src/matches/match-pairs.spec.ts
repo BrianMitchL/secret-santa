@@ -1,13 +1,13 @@
 import { calculate, Person } from 'gift-exchange';
+import matchPairs from './match-pairs';
 
 beforeEach(() => {
   globalThis.GiftExchange = {
-    calculate: jest.fn().mockImplementation(calculate),
+    calculate: vi.fn().mockImplementation(calculate),
   };
 });
 
 it('calls GiftExchange and maps people to pairs', () => {
-  const matchPairs = require('./match-pairs').default;
   const input: Person[] = [
     {
       name: 'A',

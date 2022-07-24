@@ -1,3 +1,5 @@
+/// <reference types="vitest" />
+
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 import svgr from 'vite-plugin-svgr';
@@ -6,4 +8,15 @@ import svgr from 'vite-plugin-svgr';
 export default defineConfig({
   base: '/secret-santa/',
   plugins: [react(), svgr()],
+  test: {
+    globals: true,
+    environment: 'jsdom',
+    setupFiles: './src/setupTests.ts',
+    // you might want to disable it, if you don't have tests that rely on CSS
+    // since parsing CSS is slow
+    css: true,
+    coverage: {
+      reporter: ['clover', 'json', 'lcov', 'text'],
+    },
+  },
 });
