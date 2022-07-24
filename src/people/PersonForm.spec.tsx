@@ -2,8 +2,8 @@ import { render, screen, waitFor } from '@testing-library/react';
 import { PersonForm } from './PersonForm';
 import userEvent from '@testing-library/user-event';
 
-const addPerson = () => {
-  userEvent.click(
+const addPerson = async () => {
+  await userEvent.click(
     screen.getByRole('button', {
       name: 'Add Person',
     })
@@ -41,7 +41,7 @@ it('submits a new person without a group', async () => {
 
   await userEvent.type(screen.getByLabelText('Name'), 'Test 1');
 
-  addPerson();
+  await addPerson();
 
   await waitFor(() => expect(screen.getByLabelText('Name')).toHaveValue(''));
   expect(screen.getByLabelText('Group')).toHaveValue('');
@@ -67,7 +67,7 @@ it('submits a new person with a group', async () => {
 
   await userEvent.type(screen.getByLabelText('Group'), 'Group A');
 
-  addPerson();
+  await addPerson();
 
   await waitFor(() => expect(screen.getByLabelText('Name')).toHaveValue(''));
   expect(screen.getByLabelText('Group')).toHaveValue('');
@@ -87,7 +87,7 @@ it('validates that names are unique', async () => {
 
   await userEvent.type(screen.getByLabelText('Name'), 'Test 1');
 
-  addPerson();
+  await addPerson();
 
   expect(screen.getByLabelText('Name')).toHaveValue('Test 1');
 
@@ -100,7 +100,7 @@ it('validates that names are unique', async () => {
 
   await userEvent.type(screen.getByLabelText('Name'), 'Test 2');
 
-  addPerson();
+  await addPerson();
 
   await waitFor(() => expect(screen.getByLabelText('Name')).toHaveValue(''));
   expect(screen.getByLabelText('Group')).toHaveValue('');

@@ -4,26 +4,26 @@ import userEvent from '@testing-library/user-event';
 import { Exclusion } from 'gift-exchange';
 import { exclusionKey } from '../common/utils';
 
-const setExclusion = (exclusion: Exclusion) => {
+const setExclusion = async (exclusion: Exclusion) => {
   const groupSource = screen.getByRole('group', { name: /source/i });
 
-  userEvent.click(
+  await userEvent.click(
     within(groupSource).getByRole('radio', {
       name: new RegExp(exclusion.type, 'i'),
     })
   );
-  userEvent.selectOptions(
+  await userEvent.selectOptions(
     within(groupSource).getByRole('combobox', { name: /subject/i }),
     [exclusion.subject]
   );
 
   const groupExcluded = screen.getByRole('group', { name: /excluded/i });
-  userEvent.click(
+  await userEvent.click(
     within(groupExcluded).getByRole('radio', {
       name: new RegExp(exclusion.excludedType, 'i'),
     })
   );
-  userEvent.selectOptions(
+  await userEvent.selectOptions(
     within(groupExcluded).getByRole('combobox', { name: /subject/i }),
     [exclusion.excludedSubject]
   );
@@ -61,14 +61,14 @@ const renderHelper = (
 it('adds a person to person exclusion', async () => {
   const { onSubmit } = renderHelper();
 
-  setExclusion({
+  await setExclusion({
     type: 'name',
     subject: 'Test 1',
     excludedType: 'name',
     excludedSubject: 'Test 2',
   });
 
-  userEvent.click(screen.getByRole('button', { name: /add exclusion/i }));
+  await userEvent.click(screen.getByRole('button', { name: /add exclusion/i }));
 
   await waitFor(() => expect(onSubmit).toHaveBeenCalledTimes(1));
   expect(onSubmit).toHaveBeenLastCalledWith({
@@ -82,14 +82,14 @@ it('adds a person to person exclusion', async () => {
 it('adds a person to group exclusion', async () => {
   const { onSubmit } = renderHelper();
 
-  setExclusion({
+  await setExclusion({
     type: 'name',
     subject: 'Test 1',
     excludedType: 'group',
     excludedSubject: 'Group B',
   });
 
-  userEvent.click(screen.getByRole('button', { name: /add exclusion/i }));
+  await userEvent.click(screen.getByRole('button', { name: /add exclusion/i }));
 
   await waitFor(() => expect(onSubmit).toHaveBeenCalledTimes(1));
   expect(onSubmit).toHaveBeenLastCalledWith({
@@ -103,14 +103,14 @@ it('adds a person to group exclusion', async () => {
 it('adds a group to group exclusion', async () => {
   const { onSubmit } = renderHelper();
 
-  setExclusion({
+  await setExclusion({
     type: 'group',
     subject: 'Group A',
     excludedType: 'group',
     excludedSubject: 'Group B',
   });
 
-  userEvent.click(screen.getByRole('button', { name: /add exclusion/i }));
+  await userEvent.click(screen.getByRole('button', { name: /add exclusion/i }));
 
   await waitFor(() => expect(onSubmit).toHaveBeenCalledTimes(1));
   expect(onSubmit).toHaveBeenLastCalledWith({
@@ -133,14 +133,14 @@ it('validates that no duplicates can be added', async () => {
     ],
   });
 
-  setExclusion({
+  await setExclusion({
     type: 'name',
     subject: 'Test 1',
     excludedType: 'group',
     excludedSubject: 'Group B',
   });
 
-  userEvent.click(screen.getByRole('button', { name: /add exclusion/i }));
+  await userEvent.click(screen.getByRole('button', { name: /add exclusion/i }));
 
   expect(
     await screen.findByText(/this exclusion already exists/i)

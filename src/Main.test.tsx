@@ -20,9 +20,10 @@ it('should add two persons, add and remove an exclusion, and match them', async 
 
   const peopleTabpanel = screen.getByRole('tabpanel', { name: 'People' });
 
+  await userEvent.clear(within(peopleTabpanel).getByLabelText('Name'));
   await userEvent.type(within(peopleTabpanel).getByLabelText('Name'), 'Test 1');
 
-  userEvent.click(
+  await userEvent.click(
     within(peopleTabpanel).getByRole('button', {
       name: 'Add Person',
     })
@@ -34,9 +35,10 @@ it('should add two persons, add and remove an exclusion, and match them', async 
 
   expect(within(peopleTabpanel).getByLabelText('Name')).toHaveValue('');
 
+  await userEvent.clear(within(peopleTabpanel).getByLabelText('Name'));
   await userEvent.type(within(peopleTabpanel).getByLabelText('Name'), 'Test 2');
 
-  userEvent.click(
+  await userEvent.click(
     within(peopleTabpanel).getByRole('button', {
       name: 'Add Person',
     })
@@ -47,12 +49,14 @@ it('should add two persons, add and remove an exclusion, and match them', async 
   expect(await within(peopleTabpanel).findByText(/Test 2/)).toBeInTheDocument();
 
   // Exclusions
-  userEvent.click(screen.getByRole('tab', { name: 'Exclusions' }));
+  await userEvent.click(screen.getByRole('tab', { name: 'Exclusions' }));
 
   const source = screen.getByRole('group', { name: /source/i });
   expect(within(source).queryByRole('radio', { name: /name/i })).toBeChecked();
   expect(within(source).queryByLabelText('Subject')).toHaveValue('Test 1');
-  userEvent.selectOptions(within(source).getByLabelText('Subject'), ['Test 2']);
+  await userEvent.selectOptions(within(source).getByLabelText('Subject'), [
+    'Test 2',
+  ]);
   expect(within(source).queryByLabelText('Subject')).toHaveValue('Test 2');
 
   const excluded = screen.getByRole('group', { name: /excluded/i });
@@ -60,12 +64,12 @@ it('should add two persons, add and remove an exclusion, and match them', async 
     within(excluded).queryByRole('radio', { name: /name/i })
   ).toBeChecked();
   expect(within(excluded).queryByLabelText('Subject')).toHaveValue('Test 1');
-  userEvent.selectOptions(within(excluded).getByLabelText('Subject'), [
+  await userEvent.selectOptions(within(excluded).getByLabelText('Subject'), [
     'Test 2',
   ]);
   expect(within(excluded).queryByLabelText('Subject')).toHaveValue('Test 2');
 
-  userEvent.click(
+  await userEvent.click(
     screen.getByRole('button', {
       name: 'Add Exclusion',
     })
@@ -79,7 +83,7 @@ it('should add two persons, add and remove an exclusion, and match them', async 
     /test 2 cannot give to test 2/i
   );
 
-  userEvent.click(
+  await userEvent.click(
     within(addedExclusionsPersonList).getByRole('button', { name: /remove/i })
   );
   expect(
@@ -87,11 +91,11 @@ it('should add two persons, add and remove an exclusion, and match them', async 
   ).not.toBeInTheDocument();
 
   // Matches
-  userEvent.click(screen.getByRole('tab', { name: 'Matches' }));
+  await userEvent.click(screen.getByRole('tab', { name: 'Matches' }));
 
   expect(screen.getByRole('button', { name: 'Match' })).toBeInTheDocument();
 
-  userEvent.click(screen.getByRole('button', { name: 'Match' }));
+  await userEvent.click(screen.getByRole('button', { name: 'Match' }));
 
   expect(
     await screen.findByRole('table', { name: 'Secret Santa Matches' })
@@ -108,14 +112,14 @@ it('seeds with example data when clicking the fill with example data button and 
   ).not.toBeDisabled();
   expect(screen.getByRole('button', { name: /clear/i })).toBeInTheDocument();
 
-  userEvent.click(
+  await userEvent.click(
     screen.getByRole('button', { name: /fill with example data/i })
   );
 
   const peopleTabpanel = screen.getByRole('tabpanel', { name: 'People' });
   expect(within(peopleTabpanel).queryAllByRole('listitem')).toHaveLength(15);
 
-  userEvent.click(
+  await userEvent.click(
     within(peopleTabpanel).getAllByRole('button', { name: /remove/i })[0]
   );
 
@@ -125,7 +129,7 @@ it('seeds with example data when clicking the fill with example data button and 
     screen.queryByRole('button', { name: /fill with example data/i })
   ).toBeDisabled();
 
-  userEvent.click(
+  await userEvent.click(
     screen.getByRole('button', {
       name: /clear/i,
     })
