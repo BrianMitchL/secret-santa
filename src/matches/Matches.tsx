@@ -12,8 +12,8 @@ interface Props {
 
 const giftExchangeUmdPath =
   window.location.origin +
-  process.env.PUBLIC_URL +
-  (process.env.NODE_ENV === 'production'
+  import.meta.env.BASE_URL +
+  (import.meta.env.PROD
     ? '/giftexchange.umd.production.min.js'
     : '/giftexchange.umd.development.js');
 

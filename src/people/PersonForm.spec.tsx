@@ -17,7 +17,7 @@ const renderHelper = (
   } = {}
 ) => {
   const { usedNames = [], usedGroups = [] } = opts;
-  const onSubmit = jest.fn();
+  const onSubmit = vi.fn();
 
   const utils = render(
     <PersonForm
