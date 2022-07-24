@@ -17,6 +17,11 @@ export default defineConfig({
     css: true,
     coverage: {
       reporter: ['clover', 'json', 'lcov', 'text'],
+      exclude: [
+        '**/__mocks__/**',
+        '**/*.{spec,test}.{ts,tsx}',
+        'src/setupTests.ts',
+      ],
     },
   },
 });
