@@ -65,5 +65,10 @@
   },
   "simple-git-hooks": {
     "pre-commit": "npm run lint"
+  },
+  "overrides": {
+    "@koale/useworker": {
+      "react": "^17.0.2"
+    }
   }
 }
