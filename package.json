@@ -11,17 +11,17 @@
     "@reach/tabs": "^0.16.4",
     "@reach/visually-hidden": "^0.16.0",
     "@types/jest": "^27.4.0",
-    "@types/node": "^16.11.21",
-    "@types/react": "^17.0.38",
-    "@types/react-dom": "^17.0.11",
+    "@types/node": "^16.11.45",
+    "@types/react": "^17.0.47",
+    "@types/react-dom": "^17.0.17",
     "cpx": "^1.5.0",
     "gift-exchange": "^3.0.0",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
-    "react-hook-form": "^7.25.0",
-    "react-scripts": "^5.0.0",
+    "react-hook-form": "^7.33.1",
+    "react-scripts": "^5.0.1",
     "typeface-inter": "^3.18.1",
-    "typescript": "~4.5.5"
+    "typescript": "~4.7.4"
   },
   "scripts": {
     "postinstall": "cpx 'node_modules/gift-exchange/dist/giftexchange.umd.*' public",
@@ -33,7 +33,8 @@
   "eslintConfig": {
     "extends": [
       "react-app",
-      "react-app/jest"
+      "react-app/jest",
+      "plugin:testing-library/react"
     ]
   },
   "browserslist": {
@@ -52,18 +53,23 @@
     ]
   },
   "devDependencies": {
-    "@testing-library/jest-dom": "^5.16.1",
-    "@testing-library/react": "^12.1.2",
-    "@testing-library/user-event": "^13.5.0",
-    "jest-environment-jsdom-sixteen": "^1.0.3",
-    "prettier": "^2.5.1",
+    "@testing-library/jest-dom": "^5.16.4",
+    "@testing-library/react": "^12.1.5",
+    "@testing-library/user-event": "^14.3.0",
+    "eslint-plugin-testing-library": "^5.5.1",
+    "prettier": "^2.7.1",
     "pretty-quick": "^3.1.3",
-    "simple-git-hooks": "^2.7.0"
+    "simple-git-hooks": "^2.8.0"
   },
   "prettier": {
     "singleQuote": true
   },
   "simple-git-hooks": {
     "pre-commit": "npm run lint"
+  },
+  "overrides": {
+    "@koale/useworker": {
+      "react": "^17.0.2"
+    }
   }
 }
