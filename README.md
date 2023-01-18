@@ -4,7 +4,7 @@
 
 A UI for the [`gift-exchange`](https://github.com/BrianMitchL/gift-exchange) library.
 
-Deployed to https://brianm.me/secret-santa/
+Deployed to https://projects.brianm.me/secret-santa/
 
 Create a matching of names for your gift exchange or Secret Santa. It
 supports grouping of people as well as directional exclusions based on
