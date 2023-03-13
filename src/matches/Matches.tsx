@@ -14,7 +14,7 @@ const giftExchangeUmdPath =
   window.location.origin +
   import.meta.env.BASE_URL +
   (import.meta.env.PROD
-    ? '/giftexchange.umd.production.min.js'
+    ? '/giftexchange.umd.production.js'
     : '/giftexchange.umd.development.js');
 
 const errorMessage =
