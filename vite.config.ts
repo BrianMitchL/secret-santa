@@ -16,6 +16,7 @@ export default defineConfig({
     // since parsing CSS is slow
     css: true,
     coverage: {
+      provider: 'v8',
       reporter: ['clover', 'json', 'lcov', 'text'],
       exclude: [
         '**/__mocks__/**',
