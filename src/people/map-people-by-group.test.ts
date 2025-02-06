@@ -5,12 +5,12 @@ it('preserves order when there are no groups', () => {
   const initialPeople: Person[] = ['X', 'Y', 'Z', 'A', 'B', 'C'].map(
     (name) => ({
       name,
-    })
+    }),
   );
   const expectedPeople: Person[] = ['X', 'Y', 'Z', 'A', 'B', 'C'].map(
     (name) => ({
       name,
-    })
+    }),
   );
 
   expect(mapPeopleByGroup(initialPeople)).toEqual([
@@ -27,13 +27,13 @@ it('preserves order when there is a group', () => {
     (name) => ({
       name,
       group,
-    })
+    }),
   );
   const expectedPeople: Person[] = ['X', 'Y', 'Z', 'A', 'B', 'C'].map(
     (name) => ({
       name,
       group,
-    })
+    }),
   );
 
   expect(mapPeopleByGroup(initialPeople)).toEqual([

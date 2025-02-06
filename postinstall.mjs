@@ -4,7 +4,7 @@ import { URL, fileURLToPath } from 'node:url';
 import { glob } from 'glob';
 
 const giftExchangeUmdFiles = await glob(
-  'node_modules/gift-exchange/dist/giftexchange.umd.*'
+  'node_modules/gift-exchange/dist/giftexchange.umd.*',
 );
 
 for (const filePath of giftExchangeUmdFiles) {
@@ -19,5 +19,5 @@ for (const filePath of giftExchangeUmdFiles) {
 }
 
 console.log(
-  `copied ${giftExchangeUmdFiles.length} files from gift-exchange to public directory`
+  `copied ${giftExchangeUmdFiles.length} files from gift-exchange to public directory`,
 );

@@ -14,7 +14,7 @@ it('should add two persons, add and remove an exclusion, and match them', async 
   // People
   expect(screen.queryByRole('tab', { name: 'People' })).toHaveAttribute(
     'aria-selected',
-    'true'
+    'true',
   );
   expect(screen.queryByRole('tab', { name: 'Matches' })).toBeDisabled();
 
@@ -26,7 +26,7 @@ it('should add two persons, add and remove an exclusion, and match them', async 
   await userEvent.click(
     within(peopleTabpanel).getByRole('button', {
       name: 'Add Person',
-    })
+    }),
   );
 
   expect(await screen.findByLabelText('Added People')).toBeInTheDocument();
@@ -41,7 +41,7 @@ it('should add two persons, add and remove an exclusion, and match them', async 
   await userEvent.click(
     within(peopleTabpanel).getByRole('button', {
       name: 'Add Person',
-    })
+    }),
   );
 
   expect(await screen.findByLabelText('Group No Group')).toBeInTheDocument();
@@ -61,7 +61,7 @@ it('should add two persons, add and remove an exclusion, and match them', async 
 
   const excluded = screen.getByRole('group', { name: /excluded/i });
   expect(
-    within(excluded).queryByRole('radio', { name: /name/i })
+    within(excluded).queryByRole('radio', { name: /name/i }),
   ).toBeChecked();
   expect(within(excluded).queryByLabelText('Subject')).toHaveValue('Test 1');
   await userEvent.selectOptions(within(excluded).getByLabelText('Subject'), [
@@ -72,7 +72,7 @@ it('should add two persons, add and remove an exclusion, and match them', async 
   await userEvent.click(
     screen.getByRole('button', {
       name: 'Add Exclusion',
-    })
+    }),
   );
 
   const addedExclusionsPersonList = await screen.findByRole('list', {
@@ -80,14 +80,14 @@ it('should add two persons, add and remove an exclusion, and match them', async 
   });
 
   expect(addedExclusionsPersonList).toHaveTextContent(
-    /test 2 cannot give to test 2/i
+    /test 2 cannot give to test 2/i,
   );
 
   await userEvent.click(
-    within(addedExclusionsPersonList).getByRole('button', { name: /remove/i })
+    within(addedExclusionsPersonList).getByRole('button', { name: /remove/i }),
   );
   expect(
-    screen.queryByRole('list', { name: /added exclusions/i })
+    screen.queryByRole('list', { name: /added exclusions/i }),
   ).not.toBeInTheDocument();
 
   // Matches
@@ -98,7 +98,7 @@ it('should add two persons, add and remove an exclusion, and match them', async 
   await userEvent.click(screen.getByRole('button', { name: 'Match' }));
 
   expect(
-    await screen.findByRole('table', { name: 'Secret Santa Matches' })
+    await screen.findByRole('table', { name: 'Secret Santa Matches' }),
   ).toHaveTextContent('Test 1Test 2Test 2Test 1');
 });
 
@@ -108,31 +108,37 @@ it('seeds with example data when clicking the fill with example data button and 
   expect(screen.queryByRole('tab', { name: 'Matches' })).toBeDisabled();
   expect(screen.queryByLabelText('Added People')).not.toBeInTheDocument();
   expect(
-    screen.queryByRole('button', { name: /fill with example data/i })
+    screen.queryByRole('button', { name: /fill with example data/i }),
   ).not.toBeDisabled();
   expect(screen.getByRole('button', { name: /clear/i })).toBeInTheDocument();
 
   await userEvent.click(
-    screen.getByRole('button', { name: /fill with example data/i })
+    screen.getByRole('button', { name: /fill with example data/i }),
   );
 
   const peopleTabpanel = screen.getByRole('tabpanel', { name: 'People' });
   expect(within(peopleTabpanel).queryAllByRole('listitem')).toHaveLength(15);
 
   await userEvent.click(
-    within(peopleTabpanel).getAllByRole('button', { name: /remove/i })[0]
+    within(peopleTabpanel).getAllByRole('button', { name: /remove/i })[0],
   );
 
   expect(within(peopleTabpanel).queryAllByRole('listitem')).toHaveLength(14);
 
+  await userEvent.click(screen.getByRole('tab', { name: /exclusions/i }));
+  const exclusionsTabpanel = screen.getByRole('tabpanel', {
+    name: 'Exclusions',
+  });
+  expect(within(exclusionsTabpanel).queryAllByRole('listitem')).toHaveLength(4);
+
   expect(
-    screen.queryByRole('button', { name: /fill with example data/i })
+    screen.queryByRole('button', { name: /fill with example data/i }),
   ).toBeDisabled();
 
   await userEvent.click(
     screen.getByRole('button', {
       name: /clear/i,
-    })
+    }),
   );
   expect(within(peopleTabpanel).queryAllByRole('listitem')).toHaveLength(0);
 });

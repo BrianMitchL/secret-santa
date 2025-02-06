@@ -1,15 +1,11 @@
-:root {
-  --reach-tabs: 1;
-}
-
-[data-reach-tab-list] {
+.tabs-list {
   display: flex;
   justify-content: space-evenly;
   position: relative;
   margin-bottom: 1rem;
 }
 
-[data-reach-tab-list]::before {
+.tabs-list::before {
   content: '';
   position: absolute;
   bottom: 0;
@@ -18,11 +14,7 @@
   border-bottom: 1px solid var(--nc-bg-2);
 }
 
-[data-reach-tab-list][aria-orientation='vertical'] {
-  flex-direction: column;
-}
-
-[data-reach-tab] {
+.tabs-trigger {
   display: inline-block;
   border: none;
   padding: 0.25em 0.5em;
@@ -38,22 +30,23 @@
   color: var(--nc-tx-1);
   flex: 1 1 auto;
   font-size: 1.25rem;
+  text-align: center;
 }
 
-[data-reach-tab]:hover,
-[data-reach-tab]:focus {
+.tabs-trigger:hover,
+.tabs-trigger:focus {
   background: none;
 }
 
-[data-reach-tab]:active {
+.tabs-trigger:active {
   background: var(--nc-bg-2);
 }
 
-[data-reach-tab]:disabled {
+.tabs-trigger[data-disabled] {
   opacity: 0.25;
   cursor: default;
 }
 
-[data-reach-tab][data-selected] {
+.tabs-trigger[data-state='active'] {
   border-bottom-color: currentColor;
 }

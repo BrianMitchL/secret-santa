@@ -7,7 +7,12 @@ import { exclusionKey } from './common/utils';
 import { Exclusions } from './exclusions/Exclusions';
 import { ExclusionForm } from './exclusions/ExclusionForm';
 import { Section } from './common/Section';
-import { Tab, TabList, TabPanels, Tabs, TabPanel } from '@reach/tabs';
+import {
+  Root as TabsRoot,
+  List as TabsList,
+  Trigger as TabsTrigger,
+  Content as TabsContent,
+} from '@radix-ui/react-tabs';
 import './common/tabs.css';
 import { Seed } from './Seed';
 import { useStoredState } from './common/useStoredState';
@@ -21,21 +26,21 @@ const isString = (str: unknown): str is string => typeof str === 'string';
 export function Main() {
   const [people, setPeople] = useStoredState<Person[]>(
     'secret-santa-people',
-    []
+    [],
   );
   const [exclusions, setExclusions] = useStoredState<EnhancedExclusion[]>(
     'secret-santa-exclusions',
-    []
+    [],
   );
 
   const usedNames = useMemo(() => people.map((p) => p.name), [people]);
   const usedGroups = useMemo(
     () => [...new Set(people.map((p) => p.group).filter(isString))],
-    [people]
+    [people],
   );
   const usedExclusionKeys = useMemo(
     () => exclusions.map((e) => e.key),
-    [exclusions]
+    [exclusions],
   );
 
   const addPerson = (person: Person) => {
@@ -48,13 +53,13 @@ export function Main() {
 
   const addExclusion = (exclusion: Exclusion) => {
     setExclusions((prevExclusions) =>
-      prevExclusions.concat({ ...exclusion, key: exclusionKey(exclusion) })
+      prevExclusions.concat({ ...exclusion, key: exclusionKey(exclusion) }),
     );
   };
 
   const removeExclusion = (exclusionKey: string) => {
     setExclusions((prevExclusions) =>
-      prevExclusions.filter((p) => p.key !== exclusionKey)
+      prevExclusions.filter((p) => p.key !== exclusionKey),
     );
   };
 
@@ -80,45 +85,56 @@ export function Main() {
           Clear
         </button>
       </section>
-      <Tabs>
-        <TabList>
-          <Tab>People</Tab>
-          <Tab>Exclusions</Tab>
-          <Tab disabled={people.length < 1}>Matches</Tab>
-        </TabList>
+      <TabsRoot className="tabs-root" defaultValue="people">
+        <TabsList
+          className="tabs-list"
+          aria-label="secret santa entry and matches"
+        >
+          <TabsTrigger className="tabs-trigger" value="people">
+            People
+          </TabsTrigger>
+          <TabsTrigger className="tabs-trigger" value="exclusions">
+            Exclusions
+          </TabsTrigger>
+          <TabsTrigger
+            className="tabs-trigger"
+            value="matches"
+            disabled={people.length < 1}
+          >
+            Matches
+          </TabsTrigger>
+        </TabsList>
 
-        <TabPanels>
-          <TabPanel>
-            <Section heading="People">
-              <PersonForm
-                usedNames={usedNames}
-                usedGroups={usedGroups}
-                onSubmit={addPerson}
-              />
-              <People people={people} removePerson={removePerson} />
-            </Section>
-          </TabPanel>
-          <TabPanel>
-            <Section heading="Exclusions">
-              <ExclusionForm
-                usedNames={usedNames}
-                usedGroups={usedGroups}
-                usedExclusionKeys={usedExclusionKeys}
-                onSubmit={addExclusion}
-              />
-              <Exclusions
-                exclusions={exclusions}
-                removeExclusion={removeExclusion}
-              />
-            </Section>
-          </TabPanel>
-          <TabPanel>
-            <Section heading="Matches">
-              <Matches people={people} exclusions={exclusions} />
-            </Section>
-          </TabPanel>
-        </TabPanels>
-      </Tabs>
+        <TabsContent className="tabs-content" value="people">
+          <Section heading="People">
+            <PersonForm
+              usedNames={usedNames}
+              usedGroups={usedGroups}
+              onSubmit={addPerson}
+            />
+            <People people={people} removePerson={removePerson} />
+          </Section>
+        </TabsContent>
+        <TabsContent className="tabs-content" value="exclusions">
+          <Section heading="Exclusions">
+            <ExclusionForm
+              usedNames={usedNames}
+              usedGroups={usedGroups}
+              usedExclusionKeys={usedExclusionKeys}
+              onSubmit={addExclusion}
+            />
+            <Exclusions
+              exclusions={exclusions}
+              removeExclusion={removeExclusion}
+            />
+          </Section>
+        </TabsContent>
+        <TabsContent className="tabs-content" value="matches">
+          <Section heading="Matches">
+            <Matches people={people} exclusions={exclusions} />
+          </Section>
+        </TabsContent>
+      </TabsRoot>
     </main>
   );
 }

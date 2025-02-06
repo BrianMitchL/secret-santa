@@ -18,6 +18,7 @@ export default defineConfig({
     coverage: {
       provider: 'v8',
       reporter: ['clover', 'json', 'lcov', 'text'],
+      include: ['src/**/*.{ts,tsx}'],
       exclude: [
         '**/__mocks__/**',
         '**/*.{spec,test}.{ts,tsx}',

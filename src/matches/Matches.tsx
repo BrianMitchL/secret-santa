@@ -35,7 +35,7 @@ export function Matches({ people, exclusions }: Props) {
     {
       autoTerminate: false,
       remoteDependencies: [giftExchangeUmdPath],
-    }
+    },
   );
 
   useEffect(() => {
@@ -48,7 +48,7 @@ export function Matches({ people, exclusions }: Props) {
     () => () => {
       terminateWorker();
     },
-    [terminateWorker]
+    [terminateWorker],
   );
 
   const calculateMatches = async () => {

@@ -6,7 +6,7 @@ const addPerson = async () => {
   await userEvent.click(
     screen.getByRole('button', {
       name: 'Add Person',
-    })
+    }),
   );
 };
 
@@ -14,7 +14,7 @@ const renderHelper = (
   opts: {
     usedNames?: string[];
     usedGroups?: string[];
-  } = {}
+  } = {},
 ) => {
   const { usedNames = [], usedGroups = [] } = opts;
   const onSubmit = vi.fn();
@@ -24,7 +24,7 @@ const renderHelper = (
       usedNames={usedNames}
       usedGroups={usedGroups}
       onSubmit={onSubmit}
-    />
+    />,
   );
 
   return {
