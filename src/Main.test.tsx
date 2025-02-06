@@ -125,6 +125,12 @@ it('seeds with example data when clicking the fill with example data button and 
 
   expect(within(peopleTabpanel).queryAllByRole('listitem')).toHaveLength(14);
 
+  await userEvent.click(screen.getByRole('tab', { name: /exclusions/i }));
+  const exclusionsTabpanel = screen.getByRole('tabpanel', {
+    name: 'Exclusions',
+  });
+  expect(within(exclusionsTabpanel).queryAllByRole('listitem')).toHaveLength(4);
+
   expect(
     screen.queryByRole('button', { name: /fill with example data/i }),
   ).toBeDisabled();
