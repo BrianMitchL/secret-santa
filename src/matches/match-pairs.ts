@@ -1,6 +1,7 @@
 import { Exclusion, Person, calculate } from 'gift-exchange';
 
 declare global {
+  // eslint-disable-next-line no-var
   var GiftExchange: {
     calculate: typeof calculate;
   };

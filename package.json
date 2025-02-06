@@ -18,7 +18,7 @@
     "react-dom": "^17.0.2",
     "react-hook-form": "^7.54.2",
     "typeface-inter": "^3.18.1",
-    "typescript": "~4.9.5"
+    "typescript": "~5.7.3"
   },
   "scripts": {
     "postinstall": "node postinstall.mjs",
@@ -28,13 +28,6 @@
     "test": "vitest",
     "test:coverage": "vitest run --coverage",
     "lint": "eslint \"src/**/*.{ts,tsx}\" && pretty-quick --staged"
-  },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest",
-      "plugin:testing-library/react"
-    ]
   },
   "browserslist": {
     "production": [
@@ -50,19 +43,23 @@
     ]
   },
   "devDependencies": {
+    "@eslint/js": "^9.19.0",
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^12.1.5",
     "@testing-library/user-event": "^14.6.1",
     "@vitejs/plugin-react": "^4.3.4",
     "@vitest/coverage-v8": "^0.32.0",
-    "eslint": "^8.57.1",
-    "eslint-config-react-app": "^7.0.1",
-    "eslint-plugin-testing-library": "^5.11.1",
+    "eslint": "^9.19.0",
+    "eslint-config-prettier": "^10.0.1",
+    "eslint-plugin-react": "^7.37.4",
+    "eslint-plugin-react-hooks": "5.2.0-canary-ff628334-20250205",
+    "eslint-plugin-testing-library": "^7.1.1",
     "glob": "^10.2.7",
     "jsdom": "^22.1.0",
     "prettier": "^2.8.8",
     "pretty-quick": "^3.3.1",
     "simple-git-hooks": "^2.11.1",
+    "typescript-eslint": "^8.23.0",
     "vite": "^4.5.9",
     "vite-plugin-svgr": "^4.3.0",
     "vitest": "^0.34.6"
