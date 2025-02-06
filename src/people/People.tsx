@@ -1,6 +1,5 @@
 import { useMemo } from 'react';
 import { Person } from 'gift-exchange';
-import VisuallyHidden from '@reach/visually-hidden';
 import { RemoveButton } from '../common/RemoveButton';
 import { mapPeopleByGroup } from './map-people-by-group';
 
@@ -31,7 +30,7 @@ export function People({ people, removePerson }: PeopleListProps) {
           return (
             <li key={groupId}>
               <span id={groupId}>
-                <VisuallyHidden>Group </VisuallyHidden>
+                <span className="visually-hidden">Group </span>
                 {group.group === null ? 'No Group' : group.group}
               </span>
               <ul aria-labelledby={groupId}>

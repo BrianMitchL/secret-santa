@@ -1,5 +1,4 @@
 import { MouseEventHandler } from 'react';
-import VisuallyHidden from '@reach/visually-hidden';
 import X from './x.svg?react';
 
 interface Props {
@@ -9,7 +8,7 @@ interface Props {
 export function RemoveButton({ onClick }: Props) {
   return (
     <button onClick={onClick} className="muted" title="Remove" type="button">
-      <VisuallyHidden>Remove</VisuallyHidden>
+      <span className="visually-hidden">Remove</span>
       <X aria-hidden />
     </button>
   );
