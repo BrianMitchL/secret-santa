@@ -1,6 +1,6 @@
 import { MouseEventHandler } from 'react';
 import VisuallyHidden from '@reach/visually-hidden';
-import { ReactComponent as X } from './x.svg';
+import X from './x.svg?react';
 
 interface Props {
   onClick: MouseEventHandler<HTMLButtonElement>;
