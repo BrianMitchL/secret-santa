@@ -21,7 +21,7 @@ export function Seed({ setPeople, setExclusions, disabled }: Props) {
       names.map((name, index) => ({
         name,
         group: (Math.floor(index % 3) + 1).toString(),
-      }))
+      })),
     );
 
     const es: Exclusion[] = [

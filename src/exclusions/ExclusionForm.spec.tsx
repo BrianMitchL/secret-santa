@@ -10,22 +10,22 @@ const setExclusion = async (exclusion: Exclusion) => {
   await userEvent.click(
     within(groupSource).getByRole('radio', {
       name: new RegExp(exclusion.type, 'i'),
-    })
+    }),
   );
   await userEvent.selectOptions(
     within(groupSource).getByRole('combobox', { name: /subject/i }),
-    [exclusion.subject]
+    [exclusion.subject],
   );
 
   const groupExcluded = screen.getByRole('group', { name: /excluded/i });
   await userEvent.click(
     within(groupExcluded).getByRole('radio', {
       name: new RegExp(exclusion.excludedType, 'i'),
-    })
+    }),
   );
   await userEvent.selectOptions(
     within(groupExcluded).getByRole('combobox', { name: /subject/i }),
-    [exclusion.excludedSubject]
+    [exclusion.excludedSubject],
   );
 };
 
@@ -34,7 +34,7 @@ const renderHelper = (
     usedNames?: string[];
     usedGroups?: string[];
     usedExclusionKeys?: string[];
-  } = {}
+  } = {},
 ) => {
   const {
     usedNames = ['Test 1', 'Test 2', 'Test 3'],
@@ -49,7 +49,7 @@ const renderHelper = (
       usedGroups={usedGroups}
       usedExclusionKeys={usedExclusionKeys}
       onSubmit={onSubmit}
-    />
+    />,
   );
 
   return {
@@ -143,7 +143,7 @@ it('validates that no duplicates can be added', async () => {
   await userEvent.click(screen.getByRole('button', { name: /add exclusion/i }));
 
   expect(
-    await screen.findByText(/this exclusion already exists/i)
+    await screen.findByText(/this exclusion already exists/i),
   ).toBeInTheDocument();
 
   expect(onSubmit).toHaveBeenCalledTimes(0);

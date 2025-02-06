@@ -21,21 +21,21 @@ const isString = (str: unknown): str is string => typeof str === 'string';
 export function Main() {
   const [people, setPeople] = useStoredState<Person[]>(
     'secret-santa-people',
-    []
+    [],
   );
   const [exclusions, setExclusions] = useStoredState<EnhancedExclusion[]>(
     'secret-santa-exclusions',
-    []
+    [],
   );
 
   const usedNames = useMemo(() => people.map((p) => p.name), [people]);
   const usedGroups = useMemo(
     () => [...new Set(people.map((p) => p.group).filter(isString))],
-    [people]
+    [people],
   );
   const usedExclusionKeys = useMemo(
     () => exclusions.map((e) => e.key),
-    [exclusions]
+    [exclusions],
   );
 
   const addPerson = (person: Person) => {
@@ -48,13 +48,13 @@ export function Main() {
 
   const addExclusion = (exclusion: Exclusion) => {
     setExclusions((prevExclusions) =>
-      prevExclusions.concat({ ...exclusion, key: exclusionKey(exclusion) })
+      prevExclusions.concat({ ...exclusion, key: exclusionKey(exclusion) }),
     );
   };
 
   const removeExclusion = (exclusionKey: string) => {
     setExclusions((prevExclusions) =>
-      prevExclusions.filter((p) => p.key !== exclusionKey)
+      prevExclusions.filter((p) => p.key !== exclusionKey),
     );
   };
 

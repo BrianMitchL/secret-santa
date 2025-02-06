@@ -23,5 +23,5 @@ export default tseslint.config(
     files: ['**/*{spec,test}.{js,mjs,cjs,jsx,mjsx,ts,tsx,mtsx}'],
     ...testingLibrary.configs['flat/react'],
   },
-  eslintConfigPrettier
+  eslintConfigPrettier,
 );
