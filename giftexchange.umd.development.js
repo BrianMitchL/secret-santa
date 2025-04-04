@@ -46,8 +46,8 @@
             exclusions = exclusionsOrOptions;
         }
         else {
-            exclusions = (_a = exclusionsOrOptions === null || exclusionsOrOptions === undefined ? undefined : exclusionsOrOptions.exclusions) !== null && _a !== undefined ? _a : [];
-            timeout = (_b = exclusionsOrOptions === null || exclusionsOrOptions === undefined ? undefined : exclusionsOrOptions.timeout) !== null && _b !== undefined ? _b : 1000;
+            exclusions = (_a = exclusionsOrOptions === null || exclusionsOrOptions === void 0 ? void 0 : exclusionsOrOptions.exclusions) !== null && _a !== void 0 ? _a : [];
+            timeout = (_b = exclusionsOrOptions === null || exclusionsOrOptions === void 0 ? void 0 : exclusionsOrOptions.timeout) !== null && _b !== void 0 ? _b : 1000;
         }
         let buffer1 = [];
         let buffer2 = [];
