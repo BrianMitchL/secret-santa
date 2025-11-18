@@ -54,7 +54,7 @@
     "eslint-plugin-react": "^7.37.5",
     "eslint-plugin-react-hooks": "^5.2.0",
     "eslint-plugin-testing-library": "^7.1.1",
-    "glob": "^11.0.1",
+    "glob": "^11.1.0",
     "happy-dom": "^17.4.4",
     "prettier": "^3.5.3",
     "pretty-quick": "^4.1.1",
