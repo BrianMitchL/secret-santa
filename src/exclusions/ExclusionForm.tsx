@@ -1,4 +1,4 @@
-import { SubmitHandler, useForm } from 'react-hook-form';
+import { SubmitHandler, useForm, useWatch } from 'react-hook-form';
 import '../common/form.css';
 import { Exclusion } from 'gift-exchange';
 import { exclusionKey } from '../common/utils';
@@ -21,11 +21,11 @@ export const ExclusionForm = ({
   onSubmit,
 }: Props) => {
   const {
+    control,
     handleSubmit,
     register,
     reset,
     setError,
-    watch,
     formState: { errors },
   } = useForm<FormValues>();
   const submitHandler: SubmitHandler<FormValues> = (data) => {
@@ -37,8 +37,16 @@ export const ExclusionForm = ({
     reset();
   };
 
-  const type = watch('type', 'name');
-  const excludedType = watch('excludedType', 'name');
+  const type = useWatch({
+    control,
+    name: 'type',
+    defaultValue: 'name',
+  });
+  const excludedType = useWatch({
+    control,
+    name: 'excludedType',
+    defaultValue: 'name',
+  });
 
   return (
     <form

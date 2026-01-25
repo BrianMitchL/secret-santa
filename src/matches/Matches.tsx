@@ -1,4 +1,4 @@
-import { useEffect, useLayoutEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Exclusion, Person } from 'gift-exchange';
 import { useWorker } from '@koale/useworker';
 import { Pairs } from './Pairs';
@@ -22,13 +22,8 @@ const errorMessage =
 
 export function Matches({ people, exclusions }: Props) {
   const [pairs, setPairs] = useState<[Person, Person][]>([]);
-  const [error, setError] = useState<null | Error>(null);
+  const [error, setError] = useState<boolean>(false);
   const [showGroups, setShowGroups] = useState(false);
-
-  // needs to be a layout effect to prevent flashing when changing people
-  useLayoutEffect(() => {
-    setPairs([]);
-  }, [people, exclusions]);
 
   const [workerFn, { status: workerStatus, kill: terminateWorker }] = useWorker(
     matchPairs,
@@ -38,12 +33,6 @@ export function Matches({ people, exclusions }: Props) {
     },
   );
 
-  useEffect(() => {
-    if (workerStatus === 'ERROR') {
-      setError(new Error(errorMessage));
-    }
-  }, [workerStatus]);
-
   useEffect(
     () => () => {
       terminateWorker();
@@ -52,15 +41,17 @@ export function Matches({ people, exclusions }: Props) {
   );
 
   const calculateMatches = async () => {
-    setError(null);
+    setError(false);
     try {
       setPairs(await workerFn(people, exclusions));
     } catch (e) {
       console.error(e);
-      setError(new Error(errorMessage));
+      setError(true);
       setPairs([]);
     }
   };
+
+  const errorDisplay = workerStatus === 'ERROR' || error ? errorMessage : false;
 
   return (
     <>
@@ -79,7 +70,7 @@ export function Matches({ people, exclusions }: Props) {
         />{' '}
         Show Groups
       </label>
-      {error && <p className="error">{error.message}</p>}
+      {errorDisplay ? <p className="error">{errorDisplay}</p> : null}
       <Pairs pairs={error ? [] : pairs} showGroups={showGroups} />
     </>
   );
