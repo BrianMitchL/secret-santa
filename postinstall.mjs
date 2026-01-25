@@ -1,24 +1,26 @@
-import fs from 'node:fs';
+import { copyFile } from 'node:fs';
+import { glob } from 'node:fs/promises';
 import path from 'node:path';
 import { fileURLToPath, URL } from 'node:url';
 
-import { glob } from 'glob';
-
-const giftExchangeUmdFiles = await glob(
+const giftExchangeUmdFiles = glob(
   'node_modules/gift-exchange/dist/giftexchange.umd.*',
 );
 
-for (const filePath of giftExchangeUmdFiles) {
+let copiedFiles = 0;
+
+for await (const filePath of giftExchangeUmdFiles) {
   const { base } = path.parse(filePath);
 
   const source = fileURLToPath(new URL(`./${filePath}`, import.meta.url));
   const dest = fileURLToPath(new URL(`./public/${base}`, import.meta.url));
 
-  fs.copyFile(source, dest, (err) => {
+  copyFile(source, dest, (err) => {
     if (err) throw err;
   });
+  copiedFiles += 1;
 }
 
 console.log(
-  `copied ${giftExchangeUmdFiles.length} files from gift-exchange to public directory`,
+  `copied ${copiedFiles} files from gift-exchange to public directory`,
 );
