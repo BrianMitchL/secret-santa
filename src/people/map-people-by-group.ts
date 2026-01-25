@@ -1,12 +1,12 @@
-import { Person } from 'gift-exchange';
+import type { Person } from 'gift-exchange';
 
 export function mapPeopleByGroup(people: Person[]) {
   return people
     .reduce<
-      Array<{
+      {
         group: string | null;
         people: Person[];
-      }>
+      }[]
     >((acc, person) => {
       const group = acc.find((item) => item.group === (person.group ?? null));
       if (group) {

@@ -1,5 +1,6 @@
+import type { Person } from 'gift-exchange';
 import { useMemo } from 'react';
-import { Person } from 'gift-exchange';
+
 import { RemoveButton } from '../common/RemoveButton';
 import { mapPeopleByGroup } from './map-people-by-group';
 

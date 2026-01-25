@@ -1,8 +1,10 @@
-import { SubmitHandler, useForm, useWatch } from 'react-hook-form';
 import '../common/form.css';
-import { Exclusion } from 'gift-exchange';
-import { exclusionKey } from '../common/utils';
+
 import { ErrorMessage } from '@hookform/error-message';
+import type { Exclusion } from 'gift-exchange';
+import { type SubmitHandler, useForm, useWatch } from 'react-hook-form';
+
+import { exclusionKey } from '../common/utils';
 import { ValidationError } from '../common/ValidationError';
 
 type FormValues = Exclusion;

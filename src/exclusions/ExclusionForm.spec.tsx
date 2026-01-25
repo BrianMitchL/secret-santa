@@ -1,8 +1,9 @@
 import { render, screen, waitFor, within } from '@testing-library/react';
-import { ExclusionForm } from './ExclusionForm';
 import userEvent from '@testing-library/user-event';
-import { Exclusion } from 'gift-exchange';
+import type { Exclusion } from 'gift-exchange';
+
 import { exclusionKey } from '../common/utils';
+import { ExclusionForm } from './ExclusionForm';
 
 const setExclusion = async (exclusion: Exclusion) => {
   const groupSource = screen.getByRole('group', { name: /source/i });

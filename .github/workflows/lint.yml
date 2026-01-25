@@ -1,0 +1,21 @@
+name: Lint
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build-test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Install
+        uses: ./.github/actions/install
+
+      - run: npm run check:format
+      - run: npm run check:js
+      - run: npm run build

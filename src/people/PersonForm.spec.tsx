@@ -1,6 +1,7 @@
 import { render, screen, waitFor } from '@testing-library/react';
-import { PersonForm } from './PersonForm';
 import userEvent from '@testing-library/user-event';
+
+import { PersonForm } from './PersonForm';
 
 const addPerson = async () => {
   await userEvent.click(

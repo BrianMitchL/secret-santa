@@ -1,5 +1,6 @@
-import App from './App';
 import { render, screen } from '@testing-library/react';
+
+import App from './App';
 
 it('renders a random santa emoji and sets the document title', () => {
   render(<App />);

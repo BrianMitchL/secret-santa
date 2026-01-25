@@ -1,4 +1,4 @@
-name: CI
+name: Tests
 
 on:
   push:
@@ -11,17 +11,12 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v4
-      - name: Setup node
-        uses: actions/setup-node@v4
-        with:
-          node-version: '24'
-      - name: Install deps
-        run: npm ci
-      - run: npm run build
+      - name: Install
+        uses: ./.github/actions/install
+
       - run: npm test -- --coverage
       - name: Coveralls
-        uses: coverallsapp/github-action@master
+        uses: coverallsapp/github-action@v2
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           parallel: true
@@ -31,7 +26,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Coveralls Finished
-        uses: coverallsapp/github-action@master
+        uses: coverallsapp/github-action@v2
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           parallel-finished: true

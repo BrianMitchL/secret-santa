@@ -1,6 +1,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
-import { URL, fileURLToPath } from 'node:url';
+import { fileURLToPath, URL } from 'node:url';
+
 import { glob } from 'glob';
 
 const giftExchangeUmdFiles = await glob(

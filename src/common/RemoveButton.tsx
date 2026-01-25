@@ -1,4 +1,5 @@
-import { MouseEventHandler } from 'react';
+import type { MouseEventHandler } from 'react';
+
 import X from './x.svg?react';
 
 interface Props {

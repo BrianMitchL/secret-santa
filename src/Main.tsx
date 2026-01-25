@@ -1,21 +1,23 @@
-import { useMemo } from 'react';
-import { PersonForm } from './people/PersonForm';
-import { People } from './people/People';
-import { Exclusion, Person } from 'gift-exchange';
-import { Matches } from './matches/Matches';
-import { exclusionKey } from './common/utils';
-import { Exclusions } from './exclusions/Exclusions';
-import { ExclusionForm } from './exclusions/ExclusionForm';
-import { Section } from './common/Section';
-import {
-  Root as TabsRoot,
-  List as TabsList,
-  Trigger as TabsTrigger,
-  Content as TabsContent,
-} from '@radix-ui/react-tabs';
 import './common/tabs.css';
-import { Seed } from './Seed';
+
+import {
+  Content as TabsContent,
+  List as TabsList,
+  Root as TabsRoot,
+  Trigger as TabsTrigger,
+} from '@radix-ui/react-tabs';
+import type { Exclusion, Person } from 'gift-exchange';
+import { useMemo } from 'react';
+
+import { Section } from './common/Section';
 import { useStoredState } from './common/useStoredState';
+import { exclusionKey } from './common/utils';
+import { ExclusionForm } from './exclusions/ExclusionForm';
+import { Exclusions } from './exclusions/Exclusions';
+import { Matches } from './matches/Matches';
+import { People } from './people/People';
+import { PersonForm } from './people/PersonForm';
+import { Seed } from './Seed';
 
 export interface EnhancedExclusion extends Exclusion {
   key: string;

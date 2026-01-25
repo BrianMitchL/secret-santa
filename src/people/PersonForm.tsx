@@ -1,13 +1,15 @@
-import { SubmitHandler, useForm } from 'react-hook-form';
 import '../common/form.css';
-import { Person } from 'gift-exchange';
+
 import { ErrorMessage } from '@hookform/error-message';
+import type { Person } from 'gift-exchange';
+import { type SubmitHandler, useForm } from 'react-hook-form';
+
 import { ValidationError } from '../common/ValidationError';
 
-type FormValues = {
+interface FormValues {
   ['person-name']: string;
   ['person-group']: string;
-};
+}
 
 interface Props {
   usedNames: string[];

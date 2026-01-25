@@ -1,5 +1,5 @@
-import { EnhancedExclusion } from '../Main';
 import { RemoveButton } from '../common/RemoveButton';
+import type { EnhancedExclusion } from '../Main';
 
 interface Props {
   exclusions: EnhancedExclusion[];
