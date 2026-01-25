@@ -131,7 +131,11 @@ export function Main() {
         </TabsContent>
         <TabsContent className="tabs-content" value="matches">
           <Section heading="Matches">
-            <Matches people={people} exclusions={exclusions} />
+            <Matches
+              key={[...people, ...exclusions].toString()}
+              people={people}
+              exclusions={exclusions}
+            />
           </Section>
         </TabsContent>
       </TabsRoot>

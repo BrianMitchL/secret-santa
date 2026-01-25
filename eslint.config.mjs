@@ -18,7 +18,7 @@ export default tseslint.config(
   tseslint.configs.strict,
   reactPlugin.configs.flat.recommended,
   reactPlugin.configs.flat['jsx-runtime'],
-  reactHooks.configs['recommended-latest'],
+  reactHooks.configs.flat['recommended-latest'],
   {
     files: ['**/*{spec,test}.{js,mjs,cjs,jsx,mjsx,ts,tsx,mtsx}'],
     ...testingLibrary.configs['flat/react'],

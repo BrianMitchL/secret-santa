@@ -1,11 +1,4 @@
-import { Exclusion, Person, calculate } from 'gift-exchange';
-
-declare global {
-  // eslint-disable-next-line no-var
-  var GiftExchange: {
-    calculate: typeof calculate;
-  };
-}
+import { Exclusion, Person } from 'gift-exchange';
 
 function matchPairs(people: Person[], exclusions?: Exclusion[]) {
   return (
