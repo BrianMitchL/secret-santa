@@ -1,4 +1,5 @@
-import { calculate, Person } from 'gift-exchange';
+import { calculate, type Person } from 'gift-exchange';
+
 import matchPairs from './match-pairs';
 
 beforeEach(() => {

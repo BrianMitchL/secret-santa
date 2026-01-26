@@ -1,4 +1,5 @@
-import { Person } from 'gift-exchange';
+import type { Person } from 'gift-exchange';
+
 import { mapPeopleByGroup } from './map-people-by-group';
 
 it('preserves order when there are no groups', () => {

@@ -1,4 +1,4 @@
-import { Person } from 'gift-exchange';
+import type { Person } from 'gift-exchange';
 
 interface Props {
   pairs: [Person, Person][];

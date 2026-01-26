@@ -1,4 +1,4 @@
-import { calculate } from 'gift-exchange';
+import type { calculate } from 'gift-exchange';
 
 declare global {
   var GiftExchange: {

@@ -1,9 +1,11 @@
-import { useEffect, useState } from 'react';
-import { Exclusion, Person } from 'gift-exchange';
-import { useWorker } from '@koale/useworker';
-import { Pairs } from './Pairs';
-import matchPairs from './match-pairs';
 import './matches.css';
+
+import { useWorker } from '@koale/useworker';
+import type { Exclusion, Person } from 'gift-exchange';
+import { useEffect, useState } from 'react';
+
+import matchPairs from './match-pairs';
+import { Pairs } from './Pairs';
 
 interface Props {
   people: Person[];

@@ -1,4 +1,4 @@
-import { Exclusion, Person } from 'gift-exchange';
+import type { Exclusion, Person } from 'gift-exchange';
 
 function matchPairs(people: Person[], exclusions?: Exclusion[]) {
   return (

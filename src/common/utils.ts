@@ -1,4 +1,4 @@
-import { Exclusion } from 'gift-exchange';
+import type { Exclusion } from 'gift-exchange';
 
 export const exclusionKey = (exclusion: Exclusion) =>
   exclusion.type +

@@ -1,6 +1,7 @@
-import { Exclusion, Person } from 'gift-exchange';
+import type { Exclusion, Person } from 'gift-exchange';
+
 import { exclusionKey } from './common/utils';
-import { EnhancedExclusion } from './Main';
+import type { EnhancedExclusion } from './Main';
 
 const date = new Date();
 

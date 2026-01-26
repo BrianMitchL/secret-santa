@@ -1,5 +1,5 @@
-import { vi } from 'vitest';
 import { calculate } from 'gift-exchange';
+import { vi } from 'vitest';
 
 export const useWorker = () => {
   const workerFn = async (people, exclusions) => {
