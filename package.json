@@ -62,7 +62,7 @@
     "eslint-plugin-simple-import-sort": "^12.1.1",
     "eslint-plugin-testing-library": "^7.15.4",
     "globals": "^17.1.0",
-    "happy-dom": "^20.3.7",
+    "happy-dom": "^20.8.9",
     "prettier": "^3.8.1",
     "pretty-quick": "^4.2.2",
     "simple-git-hooks": "^2.13.1",
